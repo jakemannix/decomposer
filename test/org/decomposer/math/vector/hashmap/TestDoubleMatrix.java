@@ -23,6 +23,25 @@ import junit.framework.TestCase;
 public class TestDoubleMatrix extends TestCase
 {
 
+  public static File getTmpFile() throws Exception
+  {
+    File sysTemp = new File(System.getProperty("java.io.tmpdir"));
+    File tmpDir = new File(sysTemp, TestDoubleMatrix.class.getName());  
+    return tmpDir;
+  }
+  
+  public static void delete(File file) throws Exception
+  {
+    if(file.isDirectory())
+    {
+      for(File f : file.listFiles())
+      {
+        delete(f);
+      }
+    }
+    file.delete();
+  }
+  
   public TestDoubleMatrix(String name)
   {
     super(name);
@@ -36,6 +55,7 @@ public class TestDoubleMatrix extends TestCase
   protected void tearDown() throws Exception
   {
     super.tearDown();
+    delete(getTmpFile());
   }
 
   public void testTranspose() throws Exception
@@ -43,9 +63,7 @@ public class TestDoubleMatrix extends TestCase
     int numRows = 100;
     int numCols = 200;
     DoubleMatrix matrix = randomHashMapDoubleMatrix(numRows, 50, numCols, 150, 0.5);
- //   testTranspose(matrix);
     matrix = randomImmutableSparseDoubleMatrix(numRows, 50, numCols, 150, 0.5);
-   // testTranspose(matrix);
   }
   
   public void testTransposeMultiply() throws Exception
@@ -92,7 +110,7 @@ public class TestDoubleMatrix extends TestCase
   
   public void testDiskBufferedDoubleMatrix() throws Exception
   {    
-    File tmpDir = new File("/tmp/matrix");   
+    File tmpDir = getTmpFile();
     if(tmpDir.isDirectory())
     {
       for(File f : tmpDir.listFiles())
@@ -121,6 +139,7 @@ public class TestDoubleMatrix extends TestCase
     assertTrue(w.equals(w2));
     
     w = fromDisk.timesSquared(v);
+    w2 = inMem.timesSquared(v);
     assertTrue(w.equals(w2));
   }
   
