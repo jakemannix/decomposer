@@ -7,7 +7,7 @@ import org.decomposer.math.vector.hashmap.HashMapVectorFactory;
 import org.decomposer.nlp.extraction.FeatureDictionary.Feature;
 
 /**
- * The most basic implementation of the {@link org.decomposer.nlp.extraction.FeatureExractor FeatureExractor} interface, which 
+ * The most basic implementation of the {@link org.decomposer.nlp.extraction.FeatureExtractor FeatureExractor} interface, which 
  * tokenizes input text by splitting on a given raw {@link java.lang.String String}, then uses a supplied 
  * {@link org.decomposer.nlp.extraction.FeatureDictionary FeatureDictionary} to look up the feature's index, and then weights 
  * the resultant {@link org.decomposer.math.vector.MapVector MapVector} by tf-idf weighting (where the idf is calculated based 
