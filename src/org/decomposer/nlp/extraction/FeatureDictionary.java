@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Dead simple bi-directional map (String to Integer) for translating tokens in text into columns ids in a term-document matrix.  
+ * Also accessible, along with the id of a token, is the count of the number of rows with a nonzero value on this column.
  * @author jmannix
+ * @see org.decomposer.nlp.extraction.FeatureExtractor
  */
 public class FeatureDictionary implements Serializable
 {
@@ -15,6 +17,16 @@ public class FeatureDictionary implements Serializable
   protected Map<String, Feature> _featuresByName = new HashMap<String, Feature>();
   protected Map<Integer, Feature> _featuresById = new HashMap<Integer, Feature>();
   protected Integer _maxId = 0;
+  
+  public FeatureDictionary()
+  {
+    
+  }
+  
+  public FeatureDictionary(Iterable<? extends Map<String, Double>> documents)
+  {
+    for(Map<String, Double> document : documents) updateFeature(document);
+  }
   
   public int getNumFeatures()
   {
@@ -31,26 +43,30 @@ public class FeatureDictionary implements Serializable
     return _featuresByName.get(name);
   }
   
-  public void updateFeature(String feature)
+  public void updateFeature(Map<String, Double> document)
   {
-    Feature f = getFeature(feature);
-    if(f == null)
+    for(String feature : document.keySet())
     {
-      f = new Feature();
-      f.name = feature;
-      f.id = _maxId;
-      f.count = 0;
-      _maxId++;
-      _featuresByName.put(feature, f);
-      _featuresById.put(f.id, f);
+      Feature f = getFeature(feature);
+      if(f == null)
+      {
+        f = new Feature();
+        f.name = feature;
+        f.id = _maxId;
+        f.count = 0;
+        _maxId++;
+        _featuresByName.put(feature, f);
+        _featuresById.put(f.id, f);
+      }
+      f.count++;
     }
-    f.count++;
   }
   
-  public static class Feature
+  public static class Feature implements Serializable
   {
-    String name;
-    Integer id;
-    Integer count;
+    private static final long serialVersionUID = 1L;
+    public String name;
+    public Integer id;
+    public Integer count;
   }
 }

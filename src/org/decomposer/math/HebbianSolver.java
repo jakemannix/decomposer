@@ -18,8 +18,8 @@ import org.decomposer.math.vector.array.DenseMapVectorFactory;
 
 public class HebbianSolver
 {
-  public static final String EIGEN_VECT_DIR = "eigenVectors";
-  public static final String EIGEN_VALUE_DIR = "eigenValues";
+  public static String EIGEN_VECT_DIR = "eigenVectors";
+  public static String EIGEN_VALUE_DIR = "eigenValues";
     
   private static final Logger log = Logger.getLogger(HebbianSolver.class.getName());
   protected final EigenUpdater _updater;
