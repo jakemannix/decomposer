@@ -36,13 +36,13 @@ public interface MapVector extends Iterable<IntDoublePair>, Cloneable
   
   /**
    * The number of nonZeroEntries is necessarily less than or equal to this number.  This in actuality returns the number of *set* entries.
-   * @return
+   * @return the number of nonZeroEntries
    */
   int numNonZeroEntries();
   
   /**
    * The highest dimension with a nonzero entry currently in this vector
-   * @return
+   * @return maxDimension
    */
   int maxDimension();
   
@@ -54,7 +54,7 @@ public interface MapVector extends Iterable<IntDoublePair>, Cloneable
   
   /**
    * In case you need to save the Math.sqrt() call.
-   * @return
+   * @return this.dot(this), effectively
    */
   double normSquared();
   
@@ -91,7 +91,7 @@ public interface MapVector extends Iterable<IntDoublePair>, Cloneable
   
   /**
    * Should be a deep copy if read-write, but if read-only, returning this is allowed.
-   * @return
+   * @return a deep copy or this.
    */
   MapVector clone();
   
