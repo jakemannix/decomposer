@@ -18,10 +18,10 @@ public class ImmutableSparseMapVector implements MapVector, Serializable
   private static final long serialVersionUID = 1L;
   protected final int[] _indices;
   protected final double[] _values;
-  protected final double _norm;
-  protected final double _normSquared;
+  protected double _norm;
+  protected double _normSquared;
   
-  ImmutableSparseMapVector(int[] indices, double[] values)
+  public ImmutableSparseMapVector(int[] indices, double[] values)
   {
     _indices = indices;
     _values = values;
@@ -168,6 +168,15 @@ public class ImmutableSparseMapVector implements MapVector, Serializable
   public MapVector scale(double scale)
   {
     throw new UnsupportedOperationException(getClass().getName() + " is immutable");
+  }
+  
+  public MapVector scaleOverride(double scale)
+  {
+    for(int i=0; i<_values.length; i++)
+      _values[i] = _values[i] * scale;
+    _norm *= scale;
+    _normSquared *= (scale * scale);
+    return this;
   }
 
   public void set(int index, double value)
