@@ -1,11 +1,14 @@
 package org.decomposer.math;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -232,5 +235,44 @@ public class HebbianSolver
   protected EigenStatus verify(DoubleMatrix corpus, MapVector currentPseudoEigen)
   {
     return _verifier.verify(corpus, currentPseudoEigen);
+  }
+  
+  public static void main(String args[]) throws FileNotFoundException, IOException
+  {
+    Properties props = new Properties();
+    String propertiesFile = args.length > 0 ? args[0] : "config/solver.properties";
+    props.load(new FileInputStream(propertiesFile));
+    
+    String corpusDir = props.getProperty("solver.input.dir");
+    String outputDir = props.getProperty("solver.output.dir");
+    if(corpusDir == null || corpusDir.equals("") || outputDir == null || outputDir.equals("")) 
+    {
+      log.severe(propertiesFile + " must contain values for solver.input.dir and solver.output.dir");
+      System.exit(1);
+    }
+    int inBufferSize = Integer.parseInt(props.getProperty("solver.input.bufferSize"));
+    int rank = Integer.parseInt(props.getProperty("solver.output.desiredRank"));
+    double convergence = Double.parseDouble(props.getProperty("solver.convergence"));
+    int maxPasses = Integer.parseInt(props.getProperty("solver.maxPasses"));
+
+    HebbianUpdater updater = new HebbianUpdater();
+    SingularVectorVerifier verifier = new MultiThreadedEigenVerifier();
+    HebbianSolver solver = new HebbianSolver(updater, 
+                                             new DenseMapVectorFactory(),
+                                             new DenseMapVectorFactory(), 
+                                             verifier, 
+                                             outputDir, 
+                                             convergence, 
+                                             maxPasses);
+    DoubleMatrix corpus = new DiskBufferedDoubleMatrix(new File(corpusDir), inBufferSize);
+    long now = System.currentTimeMillis();
+    TrainingState finalState = solver.solve(corpus, rank);
+    long time = (long)((System.currentTimeMillis() - now)/1000);
+    log.info("Solved " + finalState.currentEigens.numRows() + " eigenVectors in " + time + "seconds.  Persisted to " + outputDir);
+  }
+  
+  private static void usage()
+  {
+    log.info("Usage: java -cp {path to decomposer.jar} corpusDir outputDir inputBufferSize desiredRank convergence");
   }
 }
