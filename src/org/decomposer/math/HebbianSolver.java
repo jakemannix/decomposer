@@ -16,6 +16,7 @@ import org.decomposer.math.vector.DiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.DoubleMatrix;
 import org.decomposer.math.vector.HashMapDoubleMatrix;
 import org.decomposer.math.vector.MapVector;
+import org.decomposer.math.vector.ParallelMultiplyingDiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.VectorFactory;
 import org.decomposer.math.vector.array.DenseMapVectorFactory;
 
@@ -254,6 +255,7 @@ public class HebbianSolver
     int rank = Integer.parseInt(props.getProperty("solver.output.desiredRank"));
     double convergence = Double.parseDouble(props.getProperty("solver.convergence"));
     int maxPasses = Integer.parseInt(props.getProperty("solver.maxPasses"));
+    int numThreads = Integer.parseInt(props.getProperty("solver.verifier.numThreads"));
 
     HebbianUpdater updater = new HebbianUpdater();
     SingularVectorVerifier verifier = new MultiThreadedEigenVerifier();
@@ -264,15 +266,19 @@ public class HebbianSolver
                                              outputDir, 
                                              convergence, 
                                              maxPasses);
-    DoubleMatrix corpus = new DiskBufferedDoubleMatrix(new File(corpusDir), inBufferSize);
+    DoubleMatrix corpus;
+    if(numThreads <= 1)
+    {
+      corpus = new DiskBufferedDoubleMatrix(new File(corpusDir), inBufferSize);
+    }
+    else
+    {
+      corpus = new ParallelMultiplyingDiskBufferedDoubleMatrix(new File(corpusDir), inBufferSize, numThreads);
+    }
     long now = System.currentTimeMillis();
     TrainingState finalState = solver.solve(corpus, rank);
     long time = (long)((System.currentTimeMillis() - now)/1000);
     log.info("Solved " + finalState.currentEigens.numRows() + " eigenVectors in " + time + "seconds.  Persisted to " + outputDir);
   }
   
-  private static void usage()
-  {
-    log.info("Usage: java -cp {path to decomposer.jar} corpusDir outputDir inputBufferSize desiredRank convergence");
-  }
 }
