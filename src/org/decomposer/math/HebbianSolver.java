@@ -152,7 +152,7 @@ public class HebbianSolver
         {
           DiskBufferedDoubleMatrix.persistVector(_eigenVectorDir, currentEigen, i);
           MapVector eigensAsVector = _eigensVectorFactory.zeroVector();
-          for(int j=0; j<eigenValues.size(); j++) eigensAsVector.set(j, eigenValue);
+          for(int j=0; j<eigenValues.size(); j++) eigensAsVector.set(j, eigenValues.get(j));
           DiskBufferedDoubleMatrix.persistVector(_eigenValueDir, eigensAsVector, 0);
         }
         catch(IOException ioe)
