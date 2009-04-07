@@ -89,7 +89,7 @@ public class HashMapDoubleMatrix implements DoubleMatrix, Serializable
   {
     if(_numCols <= 0)
       for(Map.Entry<Integer, MapVector> entry : this)
-        _numCols = Math.min(_numCols, entry.getValue().maxDimension());
+        _numCols = Math.max(_numCols, entry.getValue().maxDimension());
     return _numCols;
   }
   

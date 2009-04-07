@@ -1,5 +1,8 @@
 package org.decomposer.math.vector.array;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 
@@ -13,6 +16,7 @@ public class DenseMapVector implements MapVector, Serializable
 {
   private static final long serialVersionUID = 1L;
   private double[] _values;
+  private int _maxDimension;
   private double _norm;
   private double _normSquared;
   private boolean _dirtyNorm;
@@ -21,6 +25,7 @@ public class DenseMapVector implements MapVector, Serializable
   DenseMapVector(int initialSize)
   {
     _values = new double[initialSize];
+    _maxDimension = -1;
     _norm = 0;
     _normSquared = 0;
     _dirtyNorm = false;
@@ -74,7 +79,12 @@ public class DenseMapVector implements MapVector, Serializable
     if(_dirtyNorm)
     {
       _normSquared = 0;
-      for(double d : _values) _normSquared += d*d;
+      for(int i=0; i<_values.length; i++)
+      {
+        double d = _values[i];
+        if(d != 0) _maxDimension = i;
+        _normSquared += d*d;
+      }
       _norm = Math.sqrt(_normSquared);
       _dirtyNorm = false;
       _dirtyNormSquared = false;
@@ -87,7 +97,12 @@ public class DenseMapVector implements MapVector, Serializable
     if(_dirtyNormSquared)
     {
       _normSquared = 0;
-      for(double d : _values) _normSquared += d*d;
+      for(int i=0; i<_values.length; i++)
+      {
+        double d = _values[i];
+        if(d != 0) _maxDimension = i;
+        _normSquared += d*d;
+      }
       _dirtyNormSquared = false;
     }
     return _normSquared;
@@ -104,23 +119,25 @@ public class DenseMapVector implements MapVector, Serializable
    */
   public final int maxDimension()
   {
-    return numNonZeroEntries();
+    if(_dirtyNormSquared) normSquared();
+    return _maxDimension;
   }
 
   public final MapVector plus(MapVector vector)
   {
     for(IntDoublePair pair : vector)
     {
-      add(pair.getInt(), pair.getDouble());
+      if(pair.getDouble() != 0) add(pair.getInt(), pair.getDouble());
     }
     return this;
   }
 
   public final MapVector plus(MapVector vector, double scale)
   {
+    if(scale == 0) return this;
     for(IntDoublePair pair : vector)
     {
-      add(pair.getInt(), scale * pair.getDouble());
+      if(pair.getDouble() != 0) add(pair.getInt(), scale * pair.getDouble());
     }
     return this;
   }
@@ -156,6 +173,25 @@ public class DenseMapVector implements MapVector, Serializable
     MapVector vector = new DenseMapVector(this.numNonZeroEntries());
     vector.plus(this);
     return vector;
+  }
+  
+  private void writeObject(ObjectOutputStream out) throws IOException
+  {
+    normSquared();
+    out.writeInt(_maxDimension);
+    out.writeDouble(_norm);
+    for(int i=0; i<=_maxDimension; i++) out.writeDouble(_values[i]);
+  }
+  
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+  {
+    _maxDimension = in.readInt();
+    _norm = in.readDouble();
+    _normSquared = _norm * _norm;
+    _dirtyNorm = false;
+    _dirtyNormSquared = false;
+    _values = new double[_maxDimension+1];
+    for(int i=0; i<=_maxDimension; i++) _values[i] = in.readDouble();
   }
   
   @Override
