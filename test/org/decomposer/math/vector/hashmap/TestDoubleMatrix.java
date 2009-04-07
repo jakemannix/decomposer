@@ -14,6 +14,7 @@ import org.decomposer.math.vector.HashMapDoubleMatrix;
 import org.decomposer.math.vector.ImmutableSparseDoubleMatrix;
 import org.decomposer.math.vector.IntDoublePair;
 import org.decomposer.math.vector.MapVector;
+import org.decomposer.math.vector.ParallelMultiplyingDiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.hashmap.HashMapVector;
 import org.decomposer.math.vector.hashmap.HashMapVectorFactory;
 
@@ -108,8 +109,8 @@ public class TestDoubleMatrix extends TestCase
     assertTrue(m.equals(mOut));
   }
   
-  public void testDiskBufferedDoubleMatrix() throws Exception
-  {    
+  private File setupDirectory() throws Exception
+  {
     File tmpDir = getTmpFile();
     if(tmpDir.isDirectory())
     {
@@ -118,6 +119,12 @@ public class TestDoubleMatrix extends TestCase
     }
     if(tmpDir.canWrite() && !tmpDir.delete()) throw new Exception(tmpDir + " exists, but I can't delete it");
     if(!tmpDir.exists() && !tmpDir.mkdir()) throw new Exception("Can't make directory");
+    return tmpDir;
+  }
+  
+  public void testDiskBufferedDoubleMatrix() throws Exception
+  {    
+    File tmpDir = setupDirectory();
     DoubleMatrix inMem = new HashMapDoubleMatrix(new HashMapVectorFactory());
     for(int i=0; i<10; i++)
     {
@@ -140,6 +147,28 @@ public class TestDoubleMatrix extends TestCase
     
     w = fromDisk.timesSquared(v);
     w2 = inMem.timesSquared(v);
+    assertTrue(w.equals(w2));
+  }
+  
+  public void testParallelDiskBufferedDoubleMatrix() throws Exception
+  {
+    File tmpDir = setupDirectory();
+    DoubleMatrix inMem = new HashMapDoubleMatrix(new HashMapVectorFactory());
+    for(int i=0; i<10; i++)
+    {
+      DoubleMatrix m = randomImmutableSparseDoubleMatrix(100, 90, 50, 20, 1.0, i * 100);
+      for(Entry<Integer, MapVector> entry : m)
+        inMem.set(entry.getKey(), entry.getValue());
+      DiskBufferedDoubleMatrix.persistChunk(tmpDir, m, true);
+    }
+    DoubleMatrix fromDisk = new ParallelMultiplyingDiskBufferedDoubleMatrix(tmpDir, 10, 4);
+
+    MapVector v = null;
+    while(v == null || v.norm() == 0)
+      v = inMem.get((int)(Math.random() * inMem.numRows()));
+    
+    MapVector w = inMem.timesSquared(v);
+    MapVector w2 = fromDisk.timesSquared(v);
     assertTrue(w.equals(w2));
   }
   

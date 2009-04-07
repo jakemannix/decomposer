@@ -132,6 +132,7 @@ public abstract class ImmutableStreamBufferedDoubleMatrix implements RowSortedDo
           // newBuffer returned null, there's no more buffers to refill, matrix is finished iterating.
           else
           {
+            _isNumColsCalculated = true;
             return false;
           }
         }
@@ -151,7 +152,15 @@ public abstract class ImmutableStreamBufferedDoubleMatrix implements RowSortedDo
     public Entry<Integer, MapVector> next()
     {
       Entry<Integer, MapVector> next = (_currentIterator != null) ? _currentIterator.next() : null;
-      _offset = next != null ? (next.getKey()+1) : Integer.MAX_VALUE;
+      if(next != null)
+      {
+        _offset = (next.getKey()+1);
+        if(!_isNumColsCalculated) _numCols = Math.max(_numCols, next.getValue().maxDimension());
+      }
+      else
+      {
+        _offset = Integer.MAX_VALUE;
+      }
       return next;
     }
     
