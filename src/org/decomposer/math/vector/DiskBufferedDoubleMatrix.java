@@ -75,6 +75,14 @@ public class DiskBufferedDoubleMatrix extends ImmutableStreamBufferedDoubleMatri
     this(diskDir, pageSize, true);
   }
   
+  public static DoubleMatrix loadFullMatrix(File diskDir, VectorFactory factory)
+  {
+    DiskBufferedDoubleMatrix m = new DiskBufferedDoubleMatrix(diskDir, Integer.MAX_VALUE);
+    DoubleMatrix memMatrix = new HashMapDoubleMatrix(factory);
+    for(Entry<Integer, MapVector> entry : m) memMatrix.set(entry.getKey(), entry.getValue());
+    return memMatrix;
+  }
+  
   public static void persistVector(File dir, MapVector vector, int rowNum) throws FileNotFoundException, IOException
   {
     HashMapDoubleMatrix matrix = new HashMapDoubleMatrix(new HashMapVectorFactory());
