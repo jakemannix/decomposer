@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.decomposer.math.vector;
 
 import java.io.Serializable;

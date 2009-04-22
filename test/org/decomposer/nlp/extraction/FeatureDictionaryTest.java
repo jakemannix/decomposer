@@ -2,14 +2,12 @@ package org.decomposer.nlp.extraction;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import org.decomposer.nlp.extraction.FeatureDictionary;
 import org.decomposer.nlp.extraction.FeatureDictionary.Feature;
 import org.decomposer.util.FileUtils;
 
