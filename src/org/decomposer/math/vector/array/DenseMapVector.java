@@ -108,14 +108,17 @@ public class DenseMapVector implements MapVector, Serializable
     return _normSquared;
   }
 
+  /**
+   * Possibly maxDimension is less than this...
+   * @return the length of the underlying value array
+   */
   public final int numNonZeroEntries()
   {
     return _values.length;
   }
   
   /**
-   * Possibly maxDimension is less than this...
-   * @return
+   * @return the highest dimension index which is nonzero
    */
   public final int maxDimension()
   {

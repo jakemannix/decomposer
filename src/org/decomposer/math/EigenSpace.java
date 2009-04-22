@@ -25,7 +25,7 @@ public interface EigenSpace
    * 
    * @param input
    * @param numNonZeroEntries
-   * @return
+   * @return a nearby sparse vector to the input with only numNonZeroEntries non-zero entries
    */
   public MapVector sparsify(MapVector input, final int numNonZeroEntries);
   

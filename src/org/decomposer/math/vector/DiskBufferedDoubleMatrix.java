@@ -115,7 +115,7 @@ public class DiskBufferedDoubleMatrix extends ImmutableStreamBufferedDoubleMatri
   /**
    * Extraordinarily expensive, do not use for random access in inner loops!
    * @param index
-   * @return
+   * @return the MapVector at the given index.
    */
   @Override
   public MapVector get(int index)

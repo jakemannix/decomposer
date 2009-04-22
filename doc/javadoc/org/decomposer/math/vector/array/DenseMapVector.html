@@ -173,7 +173,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../../../org/decomposer/math/vector/array/DenseMapVector.html#maxDimension()">maxDimension</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Possibly maxDimension is less than this...</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The highest dimension with a nonzero entry currently in this vector</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -197,7 +197,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../../../org/decomposer/math/vector/array/DenseMapVector.html#numNonZeroEntries()">numNonZeroEntries</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The number of nonZeroEntries is necessarily less than or equal to this number.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Possibly maxDimension is less than this...</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -354,15 +354,14 @@ numNonZeroEntries</H3>
 <PRE>
 public final int <B>numNonZeroEntries</B>()</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/decomposer/math/vector/MapVector.html#numNonZeroEntries()">MapVector</A></CODE></B></DD>
-<DD>The number of nonZeroEntries is necessarily less than or equal to this number.  This in actuality returns the number of *set* entries.
+<DD>Possibly maxDimension is less than this...
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/decomposer/math/vector/MapVector.html#numNonZeroEntries()">numNonZeroEntries</A></CODE> in interface <CODE><A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></DL>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>the number of nonZeroEntries</DL>
+<DT><B>Returns:</B><DD>the length of the underlying value array</DL>
 </DD>
 </DL>
 <HR>
@@ -372,14 +371,15 @@ maxDimension</H3>
 <PRE>
 public final int <B>maxDimension</B>()</PRE>
 <DL>
-<DD>Possibly maxDimension is less than this...
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/decomposer/math/vector/MapVector.html#maxDimension()">MapVector</A></CODE></B></DD>
+<DD>The highest dimension with a nonzero entry currently in this vector
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/decomposer/math/vector/MapVector.html#maxDimension()">maxDimension</A></CODE> in interface <CODE><A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></DL>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD></DL>
+<DT><B>Returns:</B><DD>the highest dimension index which is nonzero</DL>
 </DD>
 </DL>
 <HR>

@@ -86,12 +86,14 @@ is divided into following sections:
             <or>
                 <available file="${test.src.dir}"/>
                 <available file="${contrib.test.dir}"/>
+                <available file="${contrib.lsh.test.dir}"/>
             </or>
         </condition>
         <condition property="have.sources">
             <or>
                 <available file="${src.dir}"/>
-                <available file="${contrib.src.dir}"/>
+                <available file="${contrib.lucene.src.dir}"/>
+                <available file="${contrib.lsh.src.dir}"/>
             </or>
         </condition>
         <condition property="netbeans.home+have.tests">
@@ -146,9 +148,11 @@ is divided into following sections:
     </target>
     <target depends="-pre-init,-init-private,-init-libraries,-init-user,-init-project,-do-init" name="-init-check">
         <fail unless="src.dir">Must set src.dir</fail>
-        <fail unless="contrib.src.dir">Must set contrib.src.dir</fail>
+        <fail unless="contrib.lucene.src.dir">Must set contrib.lucene.src.dir</fail>
+        <fail unless="contrib.lsh.src.dir">Must set contrib.lsh.src.dir</fail>
         <fail unless="test.src.dir">Must set test.src.dir</fail>
-        <fail unless="contrib.test.dir">Must set contrib.src.dir</fail>
+        <fail unless="contrib.lucene.test.dir">Must set contrib.lucene.src.dir</fail>
+        <fail unless="contrib.lsh.test.dir">Must set contrib.lsh.src.dir</fail>
         <fail unless="build.dir">Must set build.dir</fail>
         <fail unless="dist.dir">Must set dist.dir</fail>
         <fail unless="build.classes.dir">Must set build.classes.dir</fail>
@@ -169,7 +173,7 @@ is divided into following sections:
     </target>
     <target name="-init-macrodef-javac">
         <macrodef name="javac" uri="http://www.netbeans.org/ns/j2se-project/3">
-            <attribute default="${contrib.src.dir}:${src.dir}" name="srcdir"/>
+            <attribute default="${contrib.lucene.src.dir}:${contrib.lsh.src.dir}:${src.dir}" name="srcdir"/>
             <attribute default="${build.classes.dir}" name="destdir"/>
             <attribute default="${javac.classpath}" name="classpath"/>
             <attribute default="${includes}" name="includes"/>
@@ -188,7 +192,7 @@ is divided into following sections:
             </sequential>
         </macrodef>
         <macrodef name="depend" uri="http://www.netbeans.org/ns/j2se-project/3">
-            <attribute default="${contrib.src.dir}:${src.dir}" name="srcdir"/>
+            <attribute default="${contrib.lucene.src.dir}:${contrib.lsh..src.dir}:${src.dir}" name="srcdir"/>
             <attribute default="${build.classes.dir}" name="destdir"/>
             <attribute default="${javac.classpath}" name="classpath"/>
             <sequential>
@@ -223,7 +227,10 @@ is divided into following sections:
             <sequential>
                 <junit dir="${work.dir}" errorproperty="tests.failed" failureproperty="tests.failed" fork="true" showoutput="true">
                     <batchtest todir="${build.test.results.dir}">
-                        <fileset dir="${contrib.test.dir}" excludes="@{excludes},${excludes}" includes="@{includes}">
+                        <fileset dir="${contrib.lsh.test.dir}" excludes="@{excludes},${excludes}" includes="@{includes}">
+                            <filename name="@{testincludes}"/>
+                        </fileset>
+                        <fileset dir="${contrib.lucene.test.dir}" excludes="@{excludes},${excludes}" includes="@{includes}">
                             <filename name="@{testincludes}"/>
                         </fileset>
                         <fileset dir="${test.src.dir}" excludes="@{excludes},${excludes}" includes="@{includes}">
@@ -350,7 +357,8 @@ is divided into following sections:
     <target depends="init,deps-jar,-pre-pre-compile,-pre-compile,-compile-depend" if="have.sources" name="-do-compile">
         <j2seproject3:javac/>
         <copy todir="${build.classes.dir}">
-            <fileset dir="${contrib.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${contrib.lucene.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${contrib.lsh.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
             <fileset dir="${src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
         </copy>
     </target>
@@ -528,9 +536,10 @@ is divided into following sections:
         <j2seproject3:depend classpath="${javac.test.classpath}" destdir="${build.test.classes.dir}" srcdir="${contrib.test.dir}:${test.src.dir}"/>
     </target>
     <target depends="init,compile,-pre-pre-compile-test,-pre-compile-test,-compile-test-depend" if="have.tests" name="-do-compile-test">
-        <j2seproject3:javac classpath="${javac.test.classpath}" debug="true" destdir="${build.test.classes.dir}" srcdir="${contrib.test.dir}:${test.src.dir}"/>
+        <j2seproject3:javac classpath="${javac.test.classpath}" debug="true" destdir="${build.test.classes.dir}" srcdir="${contrib.lucene.test.dir}:${contrib.lsh.test.dir}:${test.src.dir}"/>
         <copy todir="${build.test.classes.dir}">
-            <fileset dir="${contrib.test.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${contrib.lsh.test.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${contrib.lucene.test.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
             <fileset dir="${test.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
         </copy>
     </target>
@@ -546,9 +555,10 @@ is divided into following sections:
     <target depends="init,compile,-pre-pre-compile-test,-pre-compile-test-single" if="have.tests" name="-do-compile-test-single">
         <fail unless="javac.includes">Must select some files in the IDE or set javac.includes</fail>
         <j2seproject3:force-recompile destdir="${build.test.classes.dir}"/>
-        <j2seproject3:javac classpath="${javac.test.classpath}" debug="true" destdir="${build.test.classes.dir}" excludes="" includes="${javac.includes}" sourcepath="${contrib.test.dir}:${test.src.dir}" srcdir="${contrib.test.dir}:${test.src.dir}"/>
+        <j2seproject3:javac classpath="${javac.test.classpath}" debug="true" destdir="${build.test.classes.dir}" excludes="" includes="${javac.includes}" sourcepath="${contrib.lucene.test.dir}:${contrib.lsh.test.dir}:${test.src.dir}" srcdir="${contrib.lucene.test.dir}:${contrib.lsh.test.dir}:${test.src.dir}"/>
         <copy todir="${build.test.classes.dir}">
-            <fileset dir="${contrib.test.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${contrib.lucene.test.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
+            <fileset dir="${contrib.lsh.test.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
             <fileset dir="${test.src.dir}" excludes="${build.classes.excludes},${excludes}" includes="${includes}"/>
         </copy>
     </target>
