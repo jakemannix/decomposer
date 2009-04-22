@@ -82,11 +82,11 @@ public class FeatureDictionaryTest extends TestCase
         Feature f = dictionary.getFeature(s);
         if(f != null)
         {
-          log.info(s + " is in! - id = " + f.id + ", count = " + f.count);
+   //       log.info(s + " is in! - id = " + f.id + ", count = " + f.count);
         }
         else
         {
-          log.info(s + " not in!");
+   //       log.info(s + " not in!");
         }
       }
     }

@@ -55,7 +55,7 @@ function windowTitle()
 &nbsp;PREV&nbsp;
 &nbsp;NEXT</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../../../index.html?org/decomposer/math/vector//class-useMapVector.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+  <A HREF="../../../../../index.html?org/decomposer/math/vector/class-use/MapVector.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="MapVector.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;<SCRIPT type="text/javascript">
   <!--
@@ -134,7 +134,78 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#expand(org.decomposer.math.vector.MapVector, int)">expand</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector,
+       int&nbsp;numOutpuNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;essentially sparsify(uplift(project(documentVector)), numOutPutNumZeroEntries)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#expand(org.decomposer.math.vector.MapVector, int)">expand</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector,
+       int&nbsp;numOutpuNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
 <TD><CODE><B>TrainingState.</B><B><A HREF="../../../../../org/decomposer/math/TrainingState.html#mostRecentEigen()">mostRecentEigen</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#project(org.decomposer.math.vector.MapVector)">project</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take the input (sparse) document vector, and project onto the space spanned by the eigenvectors,
+ normalized by 1/singularValue.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#project(org.decomposer.math.vector.MapVector)">project</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#sparsify(org.decomposer.math.vector.MapVector, int)">sparsify</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input,
+         int&nbsp;numNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#sparsify(org.decomposer.math.vector.MapVector, int)">sparsify</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input,
+         int&nbsp;numNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#uplift(org.decomposer.math.vector.MapVector)">uplift</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;projectedVector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take an input (dense, but low-dimensional) projected vector, and (vector) sum the eigenvectors 
+ scaled by the projected vector's value at that eigen-index (again, suitably normalized by the 
+ singularValue).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#uplift(org.decomposer.math.vector.MapVector)">uplift</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;projectedVector)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -146,6 +217,24 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../../org/decomposer/math/package-summary.html">org.decomposer.math</A> with parameters of type <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#expand(org.decomposer.math.vector.MapVector, int)">expand</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector,
+       int&nbsp;numOutpuNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;essentially sparsify(uplift(project(documentVector)), numOutPutNumZeroEntries)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#expand(org.decomposer.math.vector.MapVector, int)">expand</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector,
+       int&nbsp;numOutpuNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -177,6 +266,41 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#project(org.decomposer.math.vector.MapVector)">project</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take the input (sparse) document vector, and project onto the space spanned by the eigenvectors,
+ normalized by 1/singularValue.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#project(org.decomposer.math.vector.MapVector)">project</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;documentVector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#sparsify(org.decomposer.math.vector.MapVector, int)">sparsify</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input,
+         int&nbsp;numNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#sparsify(org.decomposer.math.vector.MapVector, int)">sparsify</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input,
+         int&nbsp;numNonZeroEntries)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>EigenUpdater.</B><B><A HREF="../../../../../org/decomposer/math/EigenUpdater.html#update(org.decomposer.math.vector.MapVector, org.decomposer.math.vector.MapVector, org.decomposer.math.TrainingState)">update</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;pseudoEigen,
        <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;trainingVector,
@@ -191,6 +315,24 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TD><CODE><B>HebbianUpdater.</B><B><A HREF="../../../../../org/decomposer/math/HebbianUpdater.html#update(org.decomposer.math.vector.MapVector, org.decomposer.math.vector.MapVector, org.decomposer.math.TrainingState)">update</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;pseudoEigen,
        <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;trainingVector,
        <A HREF="../../../../../org/decomposer/math/TrainingState.html" title="class in org.decomposer.math">TrainingState</A>&nbsp;currentState)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpace.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpace.html#uplift(org.decomposer.math.vector.MapVector)">uplift</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;projectedVector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take an input (dense, but low-dimensional) projected vector, and (vector) sum the eigenvectors 
+ scaled by the projected vector's value at that eigen-index (again, suitably normalized by the 
+ singularValue).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>EigenSpaceImpl.</B><B><A HREF="../../../../../org/decomposer/math/EigenSpaceImpl.html#uplift(org.decomposer.math.vector.MapVector)">uplift</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;projectedVector)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -412,6 +554,14 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>DoubleMatrixBase.</B><B><A HREF="../../../../../org/decomposer/math/vector/DoubleMatrixBase.html#times(org.decomposer.math.vector.MapVector)">times</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
 <TD><CODE><B>HashMapDoubleMatrix.</B><B><A HREF="../../../../../org/decomposer/math/vector/HashMapDoubleMatrix.html#times(org.decomposer.math.vector.MapVector)">times</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
 
 <BR>
@@ -444,6 +594,14 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>DoubleMatrixBase.</B><B><A HREF="../../../../../org/decomposer/math/vector/DoubleMatrixBase.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
 <TD><CODE><B>HashMapDoubleMatrix.</B><B><A HREF="../../../../../org/decomposer/math/vector/HashMapDoubleMatrix.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
 
 <BR>
@@ -455,7 +613,8 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TD><CODE><B>ParallelMultiplyingDiskBufferedDoubleMatrix.</B><B><A HREF="../../../../../org/decomposer/math/vector/ParallelMultiplyingDiskBufferedDoubleMatrix.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primary method to override - should be much faster than DiskBufferedDoubleMatrix, but is not yet currently,
+ due to each thread keeping its own iterator.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -657,6 +816,14 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>DoubleMatrixBase.</B><B><A HREF="../../../../../org/decomposer/math/vector/DoubleMatrixBase.html#times(org.decomposer.math.vector.MapVector)">times</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
 <TD><CODE><B>HashMapDoubleMatrix.</B><B><A HREF="../../../../../org/decomposer/math/vector/HashMapDoubleMatrix.html#times(org.decomposer.math.vector.MapVector)">times</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
 
 <BR>
@@ -689,6 +856,14 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
+<TD><CODE><B>DoubleMatrixBase.</B><B><A HREF="../../../../../org/decomposer/math/vector/DoubleMatrixBase.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A></CODE></FONT></TD>
 <TD><CODE><B>HashMapDoubleMatrix.</B><B><A HREF="../../../../../org/decomposer/math/vector/HashMapDoubleMatrix.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;vector)</CODE>
 
 <BR>
@@ -700,7 +875,8 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 <TD><CODE><B>ParallelMultiplyingDiskBufferedDoubleMatrix.</B><B><A HREF="../../../../../org/decomposer/math/vector/ParallelMultiplyingDiskBufferedDoubleMatrix.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></B>(<A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primary method to override - should be much faster than DiskBufferedDoubleMatrix, but is not yet currently,
+ due to each thread keeping its own iterator.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1114,7 +1290,7 @@ Uses of <A HREF="../../../../../org/decomposer/math/vector/MapVector.html" title
 &nbsp;PREV&nbsp;
 &nbsp;NEXT</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../../../index.html?org/decomposer/math/vector//class-useMapVector.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+  <A HREF="../../../../../index.html?org/decomposer/math/vector/class-use/MapVector.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="MapVector.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;<SCRIPT type="text/javascript">
   <!--

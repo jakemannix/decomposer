@@ -90,4 +90,28 @@
     nbproject/build-impl.xml file. 
 
     -->
+
+  <property name="CLOVER_HOME" location="/usr/local/clover" />
+  <property name="clover.jar" location="${CLOVER_HOME}/lib/clover.jar"/>
+
+  <taskdef resource="cloverlib.xml" classpath="${clover.jar}"/>
+
+  <target name="-check.clover">
+    <available property="clover.installed" classname="com.cenqua.clover.CloverInstr" />
+  </target>
+
+  <target name="guard.noclover" depends="-check.clover" unless="clover.installed">
+    <fail message="The target you are attempting to run requires Clover, which doesn't appear to be installed"/>
+  </target>
+
+  <target name="with.clover" depends="guard.noclover">
+    <clover-setup/>
+  </target>
+  
+  <target name="clover.html" depends="with.clover">
+    <clover-html-report outdir="dist/clover" title="Decomposer"/>
+  </target>
+
+  
+
 </project>

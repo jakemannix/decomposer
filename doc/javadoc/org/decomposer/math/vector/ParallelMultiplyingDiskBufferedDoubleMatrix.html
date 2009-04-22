@@ -221,7 +221,8 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../../../org/decomposer/math/vector/ParallelMultiplyingDiskBufferedDoubleMatrix.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></B>(<A HREF="../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primary method to override - should be much faster than DiskBufferedDoubleMatrix, but is not yet currently,
+ due to each thread keeping its own iterator.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.decomposer.math.vector.DiskBufferedDoubleMatrix"><!-- --></A>
@@ -230,7 +231,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class org.decomposer.math.vector.<A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html" title="class in org.decomposer.math.vector">DiskBufferedDoubleMatrix</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#delete()">delete</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#delete(java.io.File)">delete</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#get(int)">get</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#getPageSize()">getPageSize</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#newBuffer(int, int)">newBuffer</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#numRows()">numRows</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#persistChunk(java.io.File, org.decomposer.math.vector.DoubleMatrix, boolean)">persistChunk</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#persistVector(java.io.File, org.decomposer.math.vector.MapVector, int)">persistVector</A></CODE></TD>
+<TD><CODE><A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#delete()">delete</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#delete(java.io.File)">delete</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#get(int)">get</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#getPageSize()">getPageSize</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#loadFullMatrix(java.io.File, org.decomposer.math.vector.VectorFactory)">loadFullMatrix</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#newBuffer(int, int)">newBuffer</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#numRows()">numRows</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#persistChunk(java.io.File, org.decomposer.math.vector.DoubleMatrix, boolean)">persistChunk</A>, <A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#persistVector(java.io.File, org.decomposer.math.vector.MapVector, int)">persistVector</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.decomposer.math.vector.ImmutableStreamBufferedDoubleMatrix"><!-- --></A>
@@ -328,6 +329,9 @@ timesSquared</H3>
 <PRE>
 public <A HREF="../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A> <B>timesSquared</B>(<A HREF="../../../../org/decomposer/math/vector/MapVector.html" title="interface in org.decomposer.math.vector">MapVector</A>&nbsp;input)</PRE>
 <DL>
+<DD>Primary method to override - should be much faster than DiskBufferedDoubleMatrix, but is not yet currently,
+ due to each thread keeping its own iterator.
+<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/decomposer/math/vector/DoubleMatrix.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></CODE> in interface <CODE><A HREF="../../../../org/decomposer/math/vector/DoubleMatrix.html" title="interface in org.decomposer.math.vector">DoubleMatrix</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html#timesSquared(org.decomposer.math.vector.MapVector)">timesSquared</A></CODE> in class <CODE><A HREF="../../../../org/decomposer/math/vector/DiskBufferedDoubleMatrix.html" title="class in org.decomposer.math.vector">DiskBufferedDoubleMatrix</A></CODE></DL>
 </DD>

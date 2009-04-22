@@ -17,6 +17,7 @@ public class FeatureDictionary implements Serializable
   protected Map<String, Feature> _featuresByName = new HashMap<String, Feature>();
   protected Map<Integer, Feature> _featuresById = new HashMap<Integer, Feature>();
   protected Integer _maxId = 0;
+  protected int _numDocs = 0;
   
   public FeatureDictionary()
   {
@@ -43,23 +44,34 @@ public class FeatureDictionary implements Serializable
     return _featuresByName.get(name);
   }
   
+  public int getNumDocs()
+  {
+    return _numDocs;
+  }
+  
   public void updateFeature(Map<String, Double> document)
   {
     for(String feature : document.keySet())
     {
-      Feature f = getFeature(feature);
-      if(f == null)
-      {
-        f = new Feature();
-        f.name = feature;
-        f.id = _maxId;
-        f.count = 0;
-        _maxId++;
-        _featuresByName.put(feature, f);
-        _featuresById.put(f.id, f);
-      }
-      f.count++;
+      updateFeature(feature, document.get(feature));
     }
+    _numDocs++;
+  }
+  
+  public void updateFeature(String feature, Double weight)
+  {
+    Feature f = getFeature(feature);
+    if(f == null)
+    {
+      f = new Feature();
+      f.name = feature;
+      f.id = _maxId;
+      f.count = 0;
+      _maxId++;
+      _featuresByName.put(feature, f);
+      _featuresById.put(f.id, f);
+    } 
+    f.count++;
   }
   
   public static class Feature implements Serializable

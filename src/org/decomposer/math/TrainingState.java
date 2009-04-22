@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.decomposer.math.vector.DoubleMatrix;
+import org.decomposer.math.vector.HashMapDoubleMatrix;
 import org.decomposer.math.vector.MapVector;
 import org.decomposer.math.vector.VectorFactory;
+import org.decomposer.math.vector.array.DenseMapVectorFactory;
 
 
 public class TrainingState
 {
+  TrainingState()
+  {
+    this(new DenseMapVectorFactory(), 
+         new HashMapDoubleMatrix(new DenseMapVectorFactory()), 
+         new HashMapDoubleMatrix(new DenseMapVectorFactory()));
+  }
   TrainingState(VectorFactory factory, DoubleMatrix eigens, DoubleMatrix projections)
   {
     trainingProjectionFactory = factory;

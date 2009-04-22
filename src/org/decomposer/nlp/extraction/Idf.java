@@ -6,5 +6,5 @@ package org.decomposer.nlp.extraction;
  */
 public interface Idf 
 {
-  double idf(int count);
+  double idf(int numDocs, int count);
 }

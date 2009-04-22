@@ -40,9 +40,9 @@ public class DelimitedDictionaryFeatureExtractor implements FeatureExtractor
   {
     this(featureDictionary, delimiter, new Idf() 
     {
-      public double idf(int count) 
+      public double idf(int numDocs, int count) 
       {
-        return Math.log((featureDictionary.getNumFeatures() + 1) / (count + 1));
+        return Math.log((numDocs + 1) / (count + 1));
       }
     });
   }
@@ -72,7 +72,7 @@ public class DelimitedDictionaryFeatureExtractor implements FeatureExtractor
     for(String token : tokens)
     {
       Feature feature = _featureDictionary.getFeature(token);
-      if(feature != null) vector.add(feature.id, _idf.idf(feature.count));
+      if(feature != null) vector.add(feature.id, _idf.idf(_featureDictionary.getNumDocs(), feature.count));
     }
     return new ImmutableSparseMapVector(vector);
   }

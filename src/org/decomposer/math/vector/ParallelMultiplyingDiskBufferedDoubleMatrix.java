@@ -35,6 +35,10 @@ public class ParallelMultiplyingDiskBufferedDoubleMatrix extends DiskBufferedDou
     _threadPool = Executors.newFixedThreadPool(numThreads);
   }
   
+  /**
+   * Primary method to override - should be much faster than DiskBufferedDoubleMatrix, but is not yet currently,
+   * due to each thread keeping its own iterator.
+   */
   @Override
   public MapVector timesSquared(MapVector input)
   {

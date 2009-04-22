@@ -96,6 +96,9 @@ java.lang.Object
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable</DD>
 </DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../org/decomposer/nlp/extraction/BoundedFeatureDictionary.html" title="class in org.decomposer.nlp.extraction">BoundedFeatureDictionary</A></DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE>public class <B>FeatureDictionary</B><DT>extends java.lang.Object<DT>implements java.io.Serializable</DL>
@@ -162,6 +165,14 @@ Dead simple bi-directional map (String to Integer) for translating tokens in tex
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/decomposer/nlp/extraction/FeatureDictionary.html#_numDocs">_numDocs</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -213,6 +224,14 @@ Dead simple bi-directional map (String to Integer) for translating tokens in tex
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/decomposer/nlp/extraction/FeatureDictionary.html#getNumDocs()">getNumDocs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/decomposer/nlp/extraction/FeatureDictionary.html#getNumFeatures()">getNumFeatures</A></B>()</CODE>
 
 <BR>
@@ -222,6 +241,15 @@ Dead simple bi-directional map (String to Integer) for translating tokens in tex
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/decomposer/nlp/extraction/FeatureDictionary.html#updateFeature(java.util.Map)">updateFeature</A></B>(java.util.Map&lt;java.lang.String,java.lang.Double&gt;&nbsp;document)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/decomposer/nlp/extraction/FeatureDictionary.html#updateFeature(java.lang.String, java.lang.Double)">updateFeature</A></B>(java.lang.String&nbsp;feature,
+              java.lang.Double&nbsp;weight)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -273,6 +301,16 @@ protected java.util.Map&lt;java.lang.Integer,<A HREF="../../../../org/decomposer
 _maxId</H3>
 <PRE>
 protected java.lang.Integer <B>_maxId</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_numDocs"><!-- --></A><H3>
+_numDocs</H3>
+<PRE>
+protected int <B>_numDocs</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -355,10 +393,39 @@ public <A HREF="../../../../org/decomposer/nlp/extraction/FeatureDictionary.Feat
 </DL>
 <HR>
 
+<A NAME="getNumDocs()"><!-- --></A><H3>
+getNumDocs</H3>
+<PRE>
+public int <B>getNumDocs</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="updateFeature(java.util.Map)"><!-- --></A><H3>
 updateFeature</H3>
 <PRE>
 public void <B>updateFeature</B>(java.util.Map&lt;java.lang.String,java.lang.Double&gt;&nbsp;document)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="updateFeature(java.lang.String, java.lang.Double)"><!-- --></A><H3>
+updateFeature</H3>
+<PRE>
+public void <B>updateFeature</B>(java.lang.String&nbsp;feature,
+                          java.lang.Double&nbsp;weight)</PRE>
 <DL>
 <DD><DL>
 </DL>
