@@ -8,13 +8,16 @@
 Serialized Form
 </TITLE>
 
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
 <SCRIPT type="text/javascript">
 function windowTitle()
 {
-    parent.document.title="Serialized Form";
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Serialized Form";
+    }
 }
 </SCRIPT>
 <NOSCRIPT>
@@ -23,6 +26,7 @@ function windowTitle()
 </HEAD>
 
 <BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
 
 
 <!-- ========= START OF TOP NAVBAR ======= -->
@@ -632,6 +636,9 @@ int <B>_maxDimension</B></PRE>
 <B>Class <A HREF="org/decomposer/nlp/extraction/BoundedFeatureDictionary.html" title="class in org.decomposer.nlp.extraction">org.decomposer.nlp.extraction.BoundedFeatureDictionary</A> extends <A HREF="org/decomposer/nlp/extraction/FeatureDictionary.html" title="class in org.decomposer.nlp.extraction">FeatureDictionary</A> implements Serializable</B></FONT></TH>
 </TR>
 </TABLE>
+
+<P>
+<B>serialVersionUID:&nbsp;</B>1L
 
 <P>
 <A NAME="serializedForm"><!-- --></A>

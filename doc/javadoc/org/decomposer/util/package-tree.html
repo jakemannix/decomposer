@@ -8,13 +8,16 @@
 org.decomposer.util Class Hierarchy
 </TITLE>
 
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
 <SCRIPT type="text/javascript">
 function windowTitle()
 {
-    parent.document.title="org.decomposer.util Class Hierarchy";
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="org.decomposer.util Class Hierarchy";
+    }
 }
 </SCRIPT>
 <NOSCRIPT>
@@ -23,6 +26,7 @@ function windowTitle()
 </HEAD>
 
 <BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
 
 
 <!-- ========= START OF TOP NAVBAR ======= -->
@@ -93,7 +97,7 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">java.util.AbstractSet&lt;E&gt; (implements java.util.Set&lt;E&gt;)
 <UL>
-<LI TYPE="circle">java.util.TreeSet&lt;E&gt; (implements java.lang.Cloneable, java.io.Serializable, java.util.SortedSet&lt;E&gt;)
+<LI TYPE="circle">java.util.TreeSet&lt;E&gt; (implements java.lang.Cloneable, java.util.NavigableSet&lt;E&gt;, java.io.Serializable)
 <UL>
 <LI TYPE="circle">org.decomposer.util.<A HREF="../../../org/decomposer/util/FixedSizeSortedSet.html" title="class in org.decomposer.util"><B>FixedSizeSortedSet</B></A>&lt;E&gt;</UL>
 </UL>

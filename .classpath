@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="contrib/lsh/test"/>
+	<classpathentry kind="src" path="contrib/lsh/src"/>
+	<classpathentry kind="src" path="contrib/hadoop/test"/>
+	<classpathentry kind="src" path="contrib/hadoop/src"/>
 	<classpathentry kind="src" path="contrib/lucene/src"/>
 	<classpathentry kind="src" path="contrib/lucene/test"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="lib" path="contrib/lucene/lib/lucene-analyzers-2.4.0.jar"/>
-	<classpathentry kind="lib" path="contrib/lucene/lib/lucene-core-2.4.0.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/commons-cli-2.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/commons-logging-api-1.0.4.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/hadoop-0.20.0-core.jar" sourcepath="/hadoop-trunk"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/hadoop-0.20.0-test.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/hadoop-0.20.0-tools.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/lucene-analyzers-2.4.0.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/lucene-core-2.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

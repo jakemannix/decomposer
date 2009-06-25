@@ -22,6 +22,16 @@ public class DenseMapVector implements MapVector, Serializable
   private boolean _dirtyNorm;
   private boolean _dirtyNormSquared;
   
+  public DenseMapVector(double[] values)
+  {
+    _values = values;
+    _maxDimension = values.length;
+    _norm = 0;
+    _normSquared = 0;
+    _dirtyNorm = true;
+    _dirtyNormSquared = true;
+  }
+  
   DenseMapVector(int initialSize)
   {
     _values = new double[initialSize];
@@ -32,7 +42,7 @@ public class DenseMapVector implements MapVector, Serializable
     _dirtyNormSquared = false;
   }
   
-  DenseMapVector()
+  public DenseMapVector()
   {
     this(10);
   }

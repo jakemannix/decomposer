@@ -7,6 +7,7 @@ package org.decomposer.nlp.extraction;
  */
 public class BoundedFeatureDictionary extends FeatureDictionary
 {
+  private static final long serialVersionUID = 1L;
   protected final int _maxFeatures;
   
   public BoundedFeatureDictionary(int maxFeatures)

@@ -15,8 +15,6 @@ import org.decomposer.math.vector.ImmutableSparseDoubleMatrix;
 import org.decomposer.math.vector.IntDoublePair;
 import org.decomposer.math.vector.MapVector;
 import org.decomposer.math.vector.ParallelMultiplyingDiskBufferedDoubleMatrix;
-import org.decomposer.math.vector.hashmap.HashMapVector;
-import org.decomposer.math.vector.hashmap.HashMapVectorFactory;
 
 
 import junit.framework.TestCase;

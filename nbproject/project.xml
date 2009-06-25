@@ -8,11 +8,13 @@
             <source-roots>
                 <root id="src.dir"/>
                 <root id="contrib.lucene.src.dir"/>
+                <root id="contrib.hadoop.src.dir"/>
                 <root id="contrib.lsh.src.dir"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>
                 <root id="contrib.lucene.test.dir"/>
+                <root id="contrib.hadoop.test.dir"/>
                 <root id="contrib.lsh.test.dir"/>
             </test-roots>
         </data>

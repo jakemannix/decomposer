@@ -8,14 +8,16 @@
 FeatureExpander
 </TITLE>
 
-<META NAME="keywords" CONTENT="org.decomposer.nlp.extraction.FeatureExpander interface">
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
 <SCRIPT type="text/javascript">
 function windowTitle()
 {
-    parent.document.title="FeatureExpander";
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="FeatureExpander";
+    }
 }
 </SCRIPT>
 <NOSCRIPT>
@@ -24,6 +26,7 @@ function windowTitle()
 </HEAD>
 
 <BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
 
 
 <!-- ========= START OF TOP NAVBAR ======= -->
@@ -95,6 +98,10 @@ Interface FeatureExpander</H2>
 </PRE>
 
 <P>
+This is an interface for "query expansion" - input text, get out a weighted word-bag of related text.
+<P>
+
+<P>
 <HR>
 
 <P>
@@ -135,7 +142,8 @@ expand</H3>
 java.util.Map&lt;java.lang.String,java.lang.Double&gt; <B>expand</B>(java.lang.String&nbsp;inputText)</PRE>
 <DL>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>inputText</CODE> - 
+<DT><B>Returns:</B><DD>wordbag of related terms to the input text.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

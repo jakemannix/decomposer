@@ -8,14 +8,16 @@
 FixedSizeSortedSet
 </TITLE>
 
-<META NAME="keywords" CONTENT="org.decomposer.util.FixedSizeSortedSet class">
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
 <SCRIPT type="text/javascript">
 function windowTitle()
 {
-    parent.document.title="FixedSizeSortedSet";
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="FixedSizeSortedSet";
+    }
 }
 </SCRIPT>
 <NOSCRIPT>
@@ -24,6 +26,7 @@ function windowTitle()
 </HEAD>
 
 <BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
 
 
 <!-- ========= START OF TOP NAVBAR ======= -->
@@ -97,7 +100,7 @@ java.lang.Object
               <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>org.decomposer.util.FixedSizeSortedSet&lt;E&gt;</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable, java.lang.Cloneable, java.lang.Iterable&lt;E&gt;, java.util.Collection&lt;E&gt;, java.util.Set&lt;E&gt;, java.util.SortedSet&lt;E&gt;</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable, java.lang.Cloneable, java.lang.Iterable&lt;E&gt;, java.util.Collection&lt;E&gt;, java.util.NavigableSet&lt;E&gt;, java.util.Set&lt;E&gt;, java.util.SortedSet&lt;E&gt;</DD>
 </DL>
 <HR>
 <DL>
@@ -122,6 +125,12 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../org/decomposer/util/FixedSizeSortedSet.html#FixedSizeSortedSet(java.util.Comparator, int)">FixedSizeSortedSet</A></B>(java.util.Comparator&lt;? super <A HREF="../../../org/decomposer/util/FixedSizeSortedSet.html" title="type parameter in FixedSizeSortedSet">E</A>&gt;&nbsp;comparator,
                    int&nbsp;maxSize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../org/decomposer/util/FixedSizeSortedSet.html#FixedSizeSortedSet(int)">FixedSizeSortedSet</A></B>(int&nbsp;maxSize)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -151,7 +160,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class java.util.TreeSet</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>addAll, clear, clone, comparator, contains, first, headSet, isEmpty, iterator, last, remove, size, subSet, tailSet</CODE></TD>
+<TD><CODE>addAll, ceiling, clear, clone, comparator, contains, descendingIterator, descendingSet, first, floor, headSet, headSet, higher, isEmpty, iterator, last, lower, pollFirst, pollLast, remove, size, subSet, subSet, tailSet, tailSet</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractSet"><!-- --></A>
@@ -202,6 +211,14 @@ java.lang.Object
 <B>Constructor Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="FixedSizeSortedSet(int)"><!-- --></A><H3>
+FixedSizeSortedSet</H3>
+<PRE>
+public <B>FixedSizeSortedSet</B>(int&nbsp;maxSize)</PRE>
+<DL>
+</DL>
+<HR>
 
 <A NAME="FixedSizeSortedSet(java.util.Comparator, int)"><!-- --></A><H3>
 FixedSizeSortedSet</H3>

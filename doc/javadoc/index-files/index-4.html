@@ -8,13 +8,16 @@
 D-Index
 </TITLE>
 
+<META NAME="date" CONTENT="2009-06-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
 <SCRIPT type="text/javascript">
 function windowTitle()
 {
-    parent.document.title="D-Index";
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="D-Index";
+    }
 }
 </SCRIPT>
 <NOSCRIPT>
@@ -23,6 +26,7 @@ function windowTitle()
 </HEAD>
 
 <BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
 
 
 <!-- ========= START OF TOP NAVBAR ======= -->
@@ -104,7 +108,13 @@ Constructor for class org.decomposer.nlp.extraction.<A HREF="../org/decomposer/n
 <DT><A HREF="../org/decomposer/nlp/extraction/DelimitedDictionaryFeatureExtractor.html#DelimitedDictionaryFeatureExtractor(org.decomposer.nlp.extraction.FeatureDictionary, java.lang.String, org.decomposer.nlp.extraction.Idf)"><B>DelimitedDictionaryFeatureExtractor(FeatureDictionary, String, Idf)</B></A> - 
 Constructor for class org.decomposer.nlp.extraction.<A HREF="../org/decomposer/nlp/extraction/DelimitedDictionaryFeatureExtractor.html" title="class in org.decomposer.nlp.extraction">DelimitedDictionaryFeatureExtractor</A>
 <DD>&nbsp;
-<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVector.html" title="class in org.decomposer.math.vector.array"><B>DenseMapVector</B></A> - Class in <A HREF="../org/decomposer/math/vector/array/package-summary.html">org.decomposer.math.vector.array</A><DD>&nbsp;<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVectorFactory.html" title="class in org.decomposer.math.vector.array"><B>DenseMapVectorFactory</B></A> - Class in <A HREF="../org/decomposer/math/vector/array/package-summary.html">org.decomposer.math.vector.array</A><DD>&nbsp;<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVectorFactory.html#DenseMapVectorFactory()"><B>DenseMapVectorFactory()</B></A> - 
+<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVector.html" title="class in org.decomposer.math.vector.array"><B>DenseMapVector</B></A> - Class in <A HREF="../org/decomposer/math/vector/array/package-summary.html">org.decomposer.math.vector.array</A><DD>&nbsp;<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVector.html#DenseMapVector(double[])"><B>DenseMapVector(double[])</B></A> - 
+Constructor for class org.decomposer.math.vector.array.<A HREF="../org/decomposer/math/vector/array/DenseMapVector.html" title="class in org.decomposer.math.vector.array">DenseMapVector</A>
+<DD>&nbsp;
+<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVector.html#DenseMapVector()"><B>DenseMapVector()</B></A> - 
+Constructor for class org.decomposer.math.vector.array.<A HREF="../org/decomposer/math/vector/array/DenseMapVector.html" title="class in org.decomposer.math.vector.array">DenseMapVector</A>
+<DD>&nbsp;
+<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVectorFactory.html" title="class in org.decomposer.math.vector.array"><B>DenseMapVectorFactory</B></A> - Class in <A HREF="../org/decomposer/math/vector/array/package-summary.html">org.decomposer.math.vector.array</A><DD>&nbsp;<DT><A HREF="../org/decomposer/math/vector/array/DenseMapVectorFactory.html#DenseMapVectorFactory()"><B>DenseMapVectorFactory()</B></A> - 
 Constructor for class org.decomposer.math.vector.array.<A HREF="../org/decomposer/math/vector/array/DenseMapVectorFactory.html" title="class in org.decomposer.math.vector.array">DenseMapVectorFactory</A>
 <DD>&nbsp;
 <DT><A HREF="../org/decomposer/util/FileUtils.html#deserialize(java.lang.Class, java.io.File)"><B>deserialize(Class&lt;T&gt;, File)</B></A> - 

@@ -43,4 +43,19 @@ public class FixedSizeSortedSetTest extends TestCase
     }
   }
 
+  public void testFixedSizeSortedSetNoComparator() throws Exception
+  {
+    Set<Integer> ints = new FixedSizeSortedSet<Integer>(10);
+    
+    for(Integer i=0; i<25; i++) ints.add(i.toString().hashCode());
+    assertEquals(10, ints.size());
+    int earlier = ints.iterator().next();
+    for(int in : ints)
+    {
+      assertTrue(in >= earlier);
+      System.out.println(in);
+      earlier = in;
+    }
+    
+  }
 }
