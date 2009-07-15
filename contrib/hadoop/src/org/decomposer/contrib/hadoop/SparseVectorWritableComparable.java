@@ -38,10 +38,10 @@ public class SparseVectorWritableComparable implements WritableComparable<Sparse
   {
     out.writeLong(rowNumber);
     int size = vector.numNonZeroEntries();
-    out.write(size);
+    out.writeInt(size);
     for(IntDoublePair pair : vector)
     {
-      out.write(pair.getInt());
+      out.writeInt(pair.getInt());
       out.writeDouble(pair.getDouble());
     }
   }

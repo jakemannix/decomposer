@@ -13,7 +13,10 @@ public class MatrixMultiplyReducer extends Reducer<NullWritable, DenseVectorWrit
   @Override
   public void reduce(NullWritable key, Iterable<DenseVectorWritableComparable> values, Context context) throws IOException, InterruptedException
   {
-    for(DenseVectorWritableComparable value : values) output.setVector((DenseMapVector)value.getVector().plus(output.getVector()));
+    for(DenseVectorWritableComparable value : values)
+    {
+      output.setVector((DenseMapVector)value.getVector().plus(output.getVector()));
+    }
     context.write(NullWritable.get(), output);
   }
   

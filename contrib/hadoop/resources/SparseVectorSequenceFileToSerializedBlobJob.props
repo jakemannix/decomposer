@@ -1,0 +1,3 @@
+sparse.vector.sequence.file.input.path=/tmp/sparseVectorText/outputWed_Jul_15_14_46_01_PDT_2009
+blob.output.path=/tmp/medline_as_sparse_matrix
+output.block.size=10000

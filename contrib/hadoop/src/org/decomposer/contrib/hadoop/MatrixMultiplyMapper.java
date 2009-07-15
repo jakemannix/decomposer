@@ -8,6 +8,7 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.decomposer.math.vector.array.DenseMapVector;
 
 public class MatrixMultiplyMapper extends Mapper<Object, SparseVectorWritableComparable, NullWritable, DenseVectorWritableComparable>
 {
@@ -21,9 +22,13 @@ public class MatrixMultiplyMapper extends Mapper<Object, SparseVectorWritableCom
    */
   protected void loadVectors(Configuration config) throws IOException
   {
-    Path[] cacheFiles = DistributedCache.getLocalCacheFiles(config);
-    FileSystem fs = FileSystem.getLocal(config);
-    inputVector.readFields(fs.open(cacheFiles[0]));
+//    Path[] cacheFiles = DistributedCache.getLocalCacheFiles(config);
+//    FileSystem fs = FileSystem.getLocal(config);
+//    inputVector.readFields(fs.open(cacheFiles[0]));
+    DenseMapVector vector = CacheUtils.readSerializableFromCache(config, 
+                                                                 "inputVector", 
+                                                                 DenseMapVector.class);
+    inputVector.setVector(vector);
   }
   
   @Override

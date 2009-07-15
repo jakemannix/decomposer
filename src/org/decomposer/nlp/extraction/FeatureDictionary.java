@@ -66,10 +66,11 @@ public class FeatureDictionary implements Serializable
       f = new Feature();
       f.name = feature;
       f.id = _maxId;
-      f.count = 0;
+      f.count = weight.intValue();
       _maxId++;
       _featuresByName.put(feature, f);
       _featuresById.put(f.id, f);
+      if(_numDocs < f.count) _numDocs = f.count + 1;
     } 
     f.count++;
   }

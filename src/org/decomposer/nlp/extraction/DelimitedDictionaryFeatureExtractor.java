@@ -42,6 +42,7 @@ public class DelimitedDictionaryFeatureExtractor implements FeatureExtractor
     {
       public double idf(int numDocs, int count) 
       {
+        if(numDocs < count) return 1.0;
         return Math.log((numDocs + 1) / (count + 1));
       }
     });

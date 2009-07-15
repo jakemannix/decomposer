@@ -46,6 +46,7 @@ public class HebbianSolverTest extends TestCase
                                convergence, 
                                maxNumPasses);
     DoubleMatrix corpus = TestDoubleMatrix.randomImmutableSparseDoubleMatrix(2000, 1900, 1600, 100, 1.0);
+_corpus = corpus;    
     int desiredRank = 10;
     long start = System.nanoTime();
     TrainingState finalState = solver.solve(corpus, desiredRank);
@@ -145,10 +146,12 @@ public class HebbianSolverTest extends TestCase
         }
       }
     }
+    File corpusDir = new File(TMP_EIGEN_DIR + File.separator + "corpus");
+    corpusDir.mkdir();
+    DiskBufferedDoubleMatrix.persistChunk(corpusDir, _corpus, true);
+   // eigens.delete();
     
-    eigens.delete();
-    
-    DiskBufferedDoubleMatrix.delete(new File(TMP_EIGEN_DIR));
+   // DiskBufferedDoubleMatrix.delete(new File(TMP_EIGEN_DIR));
   }
-  
+  private static DoubleMatrix _corpus = null;
 }

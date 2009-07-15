@@ -35,7 +35,7 @@ public class DenseVectorWritableComparable implements WritableComparable<DenseVe
   {
     out.writeLong(rowNum);
     int size = vector.numNonZeroEntries();
-    out.write(size);
+    out.writeInt(size);
     for(IntDoublePair pair : vector)
       out.writeDouble(pair.getDouble());
   }

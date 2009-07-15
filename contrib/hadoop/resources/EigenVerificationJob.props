@@ -1,0 +1,3 @@
+dense.vector.input.file=/Users/jmannix/open_src/decomposer/contrib/hadoop/test/data/random_matrix/serialized_format/eigenVectors/row_0_0.ser
+dense.vector.output.path=output
+corpus.matrix.path=/Users/jmannix/open_src/decomposer/contrib/hadoop/test/data/random_matrix/sequence_file_format/corpus

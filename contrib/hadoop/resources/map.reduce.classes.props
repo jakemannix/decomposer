@@ -1,0 +1,4 @@
+org.decomposer.contrib.hadoop.TextToSparseVectorJob="Transforms input text files into Sparse Vectors"
+org.decomposer.contrib.hadoop.MatrixMultiplyJob="Multiplies a vector by the input matrix"
+org.decomposer.contrib.hadoop.EigenVerificationJob="Computes 1 - cos(v, M*v) for corpus M and purported eigenvector v"
+org.decomposer.contrib.hadoop.SparseVectorSequenceFileToSerializedBlobJob="Transmutes sequence file vectors to blobs"

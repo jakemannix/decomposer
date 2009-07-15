@@ -8,11 +8,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
-import org.apache.hadoop.io.WritableUtils;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.decomposer.math.vector.array.ImmutableSparseMapVector;
 import org.decomposer.nlp.extraction.DelimitedDictionaryFeatureExtractor;
@@ -27,10 +25,13 @@ public class TextToSparseVectorMapper extends Mapper<LongWritable, Text, LongWri
   @Override
   public void setup(Context context) throws IOException, InterruptedException
   {
-    FSDataInputStream input = CacheUtils.getLocalCacheFile(context.getConfiguration(), context.getConfiguration().get("dictionary.output.path"));
-    FeatureDictionaryWritable d = new FeatureDictionaryWritable();
-    d.readFields(input);
-    featureExtractor = new DelimitedDictionaryFeatureExtractor(d.dictionary);
+    FeatureDictionary dictionary = CacheUtils.readSerializableFromCache(context.getConfiguration(), 
+                                                                        "dictionary", 
+                                                                        FeatureDictionary.class);
+  //  FSDataInputStream input = CacheUtils.getLocalCacheFile(context.getConfiguration(), context.getConfiguration().get("dictionary.output.path"));
+  //  FeatureDictionaryWritable d = new FeatureDictionaryWritable();
+  //  d.readFields(input);
+    featureExtractor = new DelimitedDictionaryFeatureExtractor(dictionary);
   }
   
   @Override

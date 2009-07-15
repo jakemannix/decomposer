@@ -1,7 +1,5 @@
 package org.decomposer.contrib.hadoop;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
@@ -16,17 +14,15 @@ import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.RecordWriter;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
+import org.apache.hadoop.util.ToolRunner;
 import org.decomposer.contrib.hadoop.TextToSparseVectorMapper.FeatureDictionaryWritable;
 import org.decomposer.nlp.extraction.FeatureDictionary;
 
-public class TextToSparseVectorJob
+public class TextToSparseVectorJob extends BaseTool
 {
   private static class IdMapper extends Mapper<LongWritable, Text, LongWritable, Text>
   {
@@ -67,8 +63,8 @@ public class TextToSparseVectorJob
     {
       for(Text value : values)
       {
-        String ngram = value.toString().split("\t")[0];
-        dictionary.updateFeature(ngram, 1.0);
+        String[] ngramAndCount = value.toString().split("\t");
+        dictionary.updateFeature(ngramAndCount[0], Double.valueOf(ngramAndCount[1]));
         numFeatures++;
         if(numFeatures >= maxFeatures) return;
       }
@@ -79,37 +75,23 @@ public class TextToSparseVectorJob
       FeatureDictionaryWritable output = new FeatureDictionaryWritable();
       output.dictionary = dictionary;
       context.write(output, NullWritable.get());
+      CacheUtils.addSerializableToCache(context.getConfiguration(), dictionary, "dictionary");
     }
   }
   
-  private static class BinarySequenceFileOutputFormat extends SequenceFileOutputFormat<FeatureDictionaryWritable, NullWritable>
+  public int run(String[] args) throws FileNotFoundException, IOException, InterruptedException, ClassNotFoundException
   {
-    @Override
-    public RecordWriter<FeatureDictionaryWritable, NullWritable> getRecordWriter(TaskAttemptContext job) 
-      throws IOException, InterruptedException
-      {
-        return super.getRecordWriter(job);
-      }
-  }
-  
-  private static class BinarySequenceFileInputFormat extends SequenceFileInputFormat<FeatureDictionaryWritable, NullWritable>
-  {
-    
-  }
-  
-  public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException, ClassNotFoundException
-  {
-    Configuration conf = new Configuration();
-    Properties configProps = new Properties();
+    Configuration conf = getConf();
+    conf.setBoolean("is.local", true);
+    conf.set("job.name", System.currentTimeMillis() + "/");
+    Properties configProps = loadJobProperties();
     String timestamp = new Date().toString().replace(' ', '_').replace(':', '_');
-    configProps.load(new FileInputStream(new File("../test.props")));
-
+    
     boolean verbose = Boolean.parseBoolean(configProps.getProperty("verbose"));
     conf.setInt("dictionary.max.features", Integer.parseInt(configProps.getProperty("dictionary.max.features")));
     
     Job job = new Job(conf, "build dictionary");    
     job.setJarByClass(TextToSparseVectorJob.class);
-    
     job.setMapperClass(IdMapper.class);
     job.setReducerClass(FeatureDictionaryBuildingReducer.class);
     FileInputFormat.addInputPath(job, new Path(configProps.getProperty("ngram.sorted.path")));
@@ -119,26 +101,34 @@ public class TextToSparseVectorJob
     job.setMapOutputValueClass(Text.class);
     job.setOutputKeyClass(FeatureDictionaryWritable.class);
     job.setOutputValueClass(NullWritable.class);
-    job.setOutputFormatClass(BinarySequenceFileOutputFormat.class);
+    job.setOutputFormatClass(SequenceFileOutputFormat.class);
     job.setNumReduceTasks(1);
     job.setSortComparatorClass(ReverseComparator.class);
     
-    boolean failed = job.waitForCompletion(verbose);
+    boolean successful = job.waitForCompletion(verbose);
     
-    if(!failed)
+    if(successful)
     {
-      job = new Job(conf, "vectorize text");
+      job = new Job(new Configuration(conf), "vectorize text");
       job.setJarByClass(TextToSparseVectorJob.class);
       job.getConfiguration().set("dictionary.output.path", configProps.getProperty("dictionary.output.path") + timestamp);
       job.setMapperClass(TextToSparseVectorMapper.class);
+      job.setNumReduceTasks(0);
       FileInputFormat.addInputPath(job, new Path(configProps.getProperty("text.input.path")));
       FileOutputFormat.setOutputPath(job, new Path(configProps.getProperty("sparse.vector.output.path") + timestamp));
       job.setOutputKeyClass(LongWritable.class);
       job.setOutputValueClass(SparseVectorWritableComparable.class);
-    
-      failed = job.waitForCompletion(verbose);
+      job.setOutputFormatClass(SequenceFileOutputFormat.class);
+      successful = job.waitForCompletion(verbose);
     }
-    System.exit(failed ? 1 : 0);
+    return (successful ? 0 : 1);
+  }
+
+  
+  public static void main(String[] args) throws Exception
+  {
+    int returnValue = ToolRunner.run(new TextToSparseVectorJob(), args);
+    System.exit(returnValue);
   }
   
 }
