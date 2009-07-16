@@ -1,0 +1,11 @@
+filter.minValue = 2
+ngram.maxValue = 4
+verbose = true
+input.path = /Users/jmannix/wordcount/input_medline
+
+ngram.count.path = /tmp/wordcount/count
+ngram.sorted.path = /tmp/wordcount/sorted
+ngram.joined.path = /tmp/wordcount/joined
+ngram.output.path = /tmp/wordcount/computed
+
+ngram.final.output.path = /Users/jmannix/wordcount/output_final_medline

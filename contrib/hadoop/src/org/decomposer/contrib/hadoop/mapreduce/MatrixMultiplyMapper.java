@@ -1,4 +1,4 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.mapreduce;
 
 import java.io.IOException;
 
@@ -8,6 +8,9 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.decomposer.contrib.hadoop.io.CacheUtils;
+import org.decomposer.contrib.hadoop.io.DenseVectorWritableComparable;
+import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
 import org.decomposer.math.vector.array.DenseMapVector;
 
 public class MatrixMultiplyMapper extends Mapper<Object, SparseVectorWritableComparable, NullWritable, DenseVectorWritableComparable>

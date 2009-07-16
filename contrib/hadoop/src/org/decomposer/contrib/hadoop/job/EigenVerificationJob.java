@@ -1,4 +1,4 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.job;
 
 import java.io.File;
 import java.util.Date;
@@ -13,6 +13,11 @@ import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.ToolRunner;
+import org.decomposer.contrib.hadoop.BaseTool;
+import org.decomposer.contrib.hadoop.io.CacheUtils;
+import org.decomposer.contrib.hadoop.io.DenseVectorWritableComparable;
+import org.decomposer.contrib.hadoop.mapreduce.MatrixMultiplyMapper;
+import org.decomposer.contrib.hadoop.mapreduce.MatrixMultiplyReducer;
 import org.decomposer.math.vector.HashMapDoubleMatrix;
 import org.decomposer.math.vector.array.DenseMapVector;
 import org.decomposer.util.FileUtils;

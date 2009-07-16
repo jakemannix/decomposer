@@ -1,4 +1,4 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.job;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,7 +19,11 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.ToolRunner;
-import org.decomposer.contrib.hadoop.TextToSparseVectorMapper.FeatureDictionaryWritable;
+import org.decomposer.contrib.hadoop.BaseTool;
+import org.decomposer.contrib.hadoop.io.CacheUtils;
+import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
+import org.decomposer.contrib.hadoop.mapreduce.TextToSparseVectorMapper;
+import org.decomposer.contrib.hadoop.mapreduce.TextToSparseVectorMapper.FeatureDictionaryWritable;
 import org.decomposer.nlp.extraction.FeatureDictionary;
 
 public class TextToSparseVectorJob extends BaseTool

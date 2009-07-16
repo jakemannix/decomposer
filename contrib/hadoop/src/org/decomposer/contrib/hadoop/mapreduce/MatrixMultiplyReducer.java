@@ -1,9 +1,10 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.mapreduce;
 
 import java.io.IOException;
 
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.decomposer.contrib.hadoop.io.DenseVectorWritableComparable;
 import org.decomposer.math.vector.array.DenseMapVector;
 
 public class MatrixMultiplyReducer extends Reducer<NullWritable, DenseVectorWritableComparable, NullWritable, DenseVectorWritableComparable>

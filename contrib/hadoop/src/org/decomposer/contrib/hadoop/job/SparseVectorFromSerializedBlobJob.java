@@ -1,4 +1,4 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.job;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.SequenceFile.Writer;
+import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
 import org.decomposer.math.vector.DiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.DoubleMatrix;
 import org.decomposer.math.vector.MapVector;

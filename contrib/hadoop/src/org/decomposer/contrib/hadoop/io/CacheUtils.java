@@ -1,4 +1,4 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.io;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

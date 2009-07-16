@@ -1,4 +1,4 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.job;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +15,8 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.ToolRunner;
+import org.decomposer.contrib.hadoop.BaseTool;
+import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
 import org.decomposer.math.vector.DiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.DoubleMatrix;
 import org.decomposer.math.vector.HashMapDoubleMatrix;

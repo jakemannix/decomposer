@@ -1,4 +1,4 @@
-package org.decomposer.contrib.hadoop;
+package org.decomposer.contrib.hadoop.mapreduce;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,6 +12,8 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.decomposer.contrib.hadoop.io.CacheUtils;
+import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
 import org.decomposer.math.vector.array.ImmutableSparseMapVector;
 import org.decomposer.nlp.extraction.DelimitedDictionaryFeatureExtractor;
 import org.decomposer.nlp.extraction.FeatureDictionary;
@@ -44,7 +46,7 @@ public class TextToSparseVectorMapper extends Mapper<LongWritable, Text, LongWri
   
   public static class FeatureDictionaryWritable implements Writable
   {
-    FeatureDictionary dictionary;
+    public FeatureDictionary dictionary;
     
     
     @Override
