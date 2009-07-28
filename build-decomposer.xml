@@ -175,8 +175,8 @@
     </javac>
   </target>
 
-  <target name="contrib-hadoop-jar" depends="contrib-hadoop-build" description="Build hadoop contrib jar file">
-  	<copy todir="${contrib.root.dir}/hadoop/lib" file="${dist.dir}/${name}-${curr.release}.jar"/>
+  <target name="contrib-hadoop-jar" depends="jar, contrib-hadoop-build" description="Build hadoop contrib jar file">
+    <copy todir="${contrib.root.dir}/hadoop/lib" file="${dist.dir}/${name}-${curr.release}.jar"/>
     <jar destfile="${dist.dir}/${name}-contrib-hadoop-${curr.release}.jar">
       <manifest>
         <attribute name="Main-Class" value="${contrib.hadoop.main.class}"/>
