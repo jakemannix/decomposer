@@ -1,0 +1,3 @@
+verbose=true
+text.input.path=/usr/local/wikipedia-html
+text.output.path=/Users/jmannix/wikipedia-a-one-file

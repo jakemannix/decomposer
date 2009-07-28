@@ -3,3 +3,5 @@ org.decomposer.contrib.hadoop.job.MatrixMultiplyJob="Multiplies a vector by the 
 org.decomposer.contrib.hadoop.job.EigenVerificationJob="Computes 1 - cos(v, M*v) for corpus M and purported eigenvector v"
 org.decomposer.contrib.hadoop.job.SparseVectorSequenceFileToSerializedBlobJob="Transmutes sequence file vectors to blobs"
 org.decomposer.contrib.hadoop.job.PhraseExtractorJob="Takes input text and produces a list of statistically significant phrases"
+org.decomposer.contrib.hadoop.job.TextConcatenationJob="Removes newlines from text files and then concatenates all text files together, separated by newlines"
+

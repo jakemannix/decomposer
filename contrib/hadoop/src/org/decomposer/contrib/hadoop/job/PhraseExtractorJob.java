@@ -1,7 +1,5 @@
 package org.decomposer.contrib.hadoop.job;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
@@ -12,6 +10,7 @@ import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.io.WritableComparator;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -81,6 +80,19 @@ public class PhraseExtractorJob extends BaseTool
   
   public static class InverseFloatReducer extends InvertingReducer<FloatWritable, Text> {}
   
+  public static class ReverseFloatWritableComparator extends WritableComparator
+  {
+    public ReverseFloatWritableComparator()
+    {
+      super(FloatWritable.class, true);
+    }
+    @Override
+    public int compare(WritableComparable a, WritableComparable b)
+    {
+      return super.compare(b, a);
+    }
+  }
+  
   public static enum PhrazerCounterTypes
   {
     NUM_WRONG_SORTS,
@@ -112,6 +124,7 @@ public class PhraseExtractorJob extends BaseTool
     String timestamp = new Date().toString().replace(' ', '_').replace(':', '_');
     conf.setInt("filter.minValue", Integer.parseInt(configProps.getProperty("filter.minValue")));
     conf.setInt("ngram.maxValue", Integer.parseInt(configProps.getProperty("ngram.maxValue")));
+    conf.setBoolean("input.isHtml", Boolean.parseBoolean(configProps.getProperty("input.isHtml")));
     boolean verbose = Boolean.parseBoolean(configProps.getProperty("verbose"));
     
     /**
@@ -208,6 +221,7 @@ public class PhraseExtractorJob extends BaseTool
       job.setJarByClass(PhraseExtractorJob.class);
       job.setMapperClass(InvertingFloatMapper.class);
       job.setReducerClass(InverseFloatReducer.class);
+      job.setSortComparatorClass(ReverseFloatWritableComparator.class);
       job.setMapOutputKeyClass(FloatWritable.class);
       job.setMapOutputValueClass(Text.class);
       job.setOutputKeyClass(Text.class);

@@ -107,7 +107,7 @@ public class TextToSparseVectorJob extends BaseTool
     job.setOutputValueClass(NullWritable.class);
     job.setOutputFormatClass(SequenceFileOutputFormat.class);
     job.setNumReduceTasks(1);
-    job.setSortComparatorClass(ReverseComparator.class);
+  //  job.setSortComparatorClass(ReverseComparator.class);
     
     boolean successful = job.waitForCompletion(verbose);
     
@@ -117,6 +117,7 @@ public class TextToSparseVectorJob extends BaseTool
       job.setJarByClass(TextToSparseVectorJob.class);
       job.getConfiguration().set("dictionary.output.path", configProps.getProperty("dictionary.output.path") + timestamp);
       job.setMapperClass(TextToSparseVectorMapper.class);
+      job.getConfiguration().setInt("ngram.maxValue", Integer.parseInt(configProps.getProperty("ngram.maxValue"), 5));
       job.setNumReduceTasks(0);
       FileInputFormat.addInputPath(job, new Path(configProps.getProperty("text.input.path")));
       FileOutputFormat.setOutputPath(job, new Path(configProps.getProperty("sparse.vector.output.path") + timestamp));

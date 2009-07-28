@@ -19,6 +19,11 @@ public class TextReader extends Reader
   {
     // NO-OP
   }
+  
+  public char nextChar()
+  {
+    return (char) text.charAt(current++);
+  }
 
   @Override
   public int read(char[] cbuf, int off, int len) throws IOException
@@ -36,7 +41,7 @@ public class TextReader extends Reader
     int i = 0;
     while(i < n)
     {
-      cbuf[off + i++] = (char) text.charAt(current++);
+      cbuf[off + i++] = nextChar();
     }
     return n;
   }

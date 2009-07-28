@@ -1,6 +1,9 @@
-dictionary.max.features=10000
-ngram.sorted.path=/Users/jmannix/wordcount/sorted_big_output_truncated
+dictionary.max.features=50000
+ngram.maxValue=4
+#ngram.sorted.path=/Users/jmannix/wordcount/sorted_big_output_truncated
+ngram.sorted.path=/Users/jmannix/wordcount/wikipedia-phrases
 dictionary.output.path=/tmp/sparseVectorText/dictionary
-text.input.path=/Users/jmannix/wordcount/input_medline
-sparse.vector.output.path=/tmp/sparseVectorText/output
+#text.input.path=/Users/jmannix/wordcount/input_medline
+text.input.path=/Users/jmannix/wikipedia-a-one-fileMon_Jul_20_21-59-51_PDT_2009
+sparse.vector.output.path=/tmp/sparseVectorText/wikipedia/output
 verbose=true

@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="contrib/lsh/test"/>
 	<classpathentry kind="src" path="contrib/lsh/src"/>
-	<classpathentry kind="src" path="contrib/hadoop/test"/>
+	<classpathentry excluding="data/random_matrix/sequence_file_format/|data/random_matrix/serialized_format/corpus/|data/random_matrix/serialized_format/eigenValues/|data/random_matrix/serialized_format/eigenVectors/|data/random_matrix/|data/random_matrix/serialized_format/|data/" kind="src" path="contrib/hadoop/test"/>
 	<classpathentry kind="src" path="contrib/hadoop/src"/>
 	<classpathentry kind="src" path="contrib/lucene/src"/>
 	<classpathentry kind="src" path="contrib/lucene/test"/>
@@ -18,5 +18,9 @@
 	<classpathentry kind="lib" path="contrib/hadoop/lib/hadoop-0.20.0-tools.jar"/>
 	<classpathentry kind="lib" path="contrib/hadoop/lib/lucene-analyzers-2.4.0.jar"/>
 	<classpathentry kind="lib" path="contrib/hadoop/lib/lucene-core-2.4.0.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/nekohtml.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="contrib/hadoop/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="lib/commons-math-2.0-SNAPSHOT.jar" sourcepath="/commons-math"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
