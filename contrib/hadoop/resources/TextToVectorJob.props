@@ -1,9 +1,9 @@
 dictionary.max.features=50000
+input.text.vector.normalization.factor=1000
 ngram.maxValue=4
-#ngram.sorted.path=/Users/jmannix/wordcount/sorted_big_output_truncated
-ngram.sorted.path=/Users/jmannix/wordcount/wikipedia-phrases
+ngram.sorted.path=/Users/jmannix/wordcount/output_final_wikipedia_ASat_Aug_01_19_06_39_PDT_2009
 dictionary.output.path=/tmp/sparseVectorText/dictionary
 #text.input.path=/Users/jmannix/wordcount/input_medline
-text.input.path=/Users/jmannix/wikipedia-a-one-fileMon_Jul_20_21-59-51_PDT_2009
+text.input.path=/Users/jmannix/wikipedia-html-onefile
 sparse.vector.output.path=/tmp/sparseVectorText/wikipedia/output
 verbose=true

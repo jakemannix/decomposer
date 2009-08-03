@@ -8,14 +8,22 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map.Entry;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.io.SequenceFile.Writer;
+import org.decomposer.contrib.hadoop.math.MapVectorWritableComparable;
+import org.decomposer.math.vector.DoubleMatrix;
+import org.decomposer.math.vector.HashMapDoubleMatrix;
+import org.decomposer.math.vector.MapVector;
+import org.decomposer.math.vector.hashmap.HashMapVectorFactory;
 
 public class CacheUtils
 {  
@@ -86,7 +94,34 @@ public class CacheUtils
     }
     return t;
   }
-
+  
+  public static void writeVectorToSequenceFile(MapVector vector, Path outputDir, Configuration conf) throws Exception
+  {
+    DoubleMatrix matrix = new HashMapDoubleMatrix(new HashMapVectorFactory());
+    matrix.set(0, vector);
+    writeMatrixToSequenceFile(matrix, outputDir, conf);
+  }
+  
+  public static void writeMatrixToSequenceFile(DoubleMatrix matrix, Path outputDir, Configuration conf) throws Exception
+  {
+    FileSystem fs = FileSystem.get(conf);
+    
+    SequenceFile.Writer writer = new Writer(fs, 
+                                            conf, 
+                                            outputDir, 
+                                            LongWritable.class, 
+                                            MapVectorWritableComparable.class);
+    MapVectorWritableComparable vectorWritable = new MapVectorWritableComparable(outputDir);
+    LongWritable key = new LongWritable();
+    for(Entry<Integer, MapVector> vector : matrix)
+    {
+      vectorWritable.setRow(vector.getKey());
+      vectorWritable.setVector(vector.getValue());
+      key.set(vector.getKey());
+      writer.append(key, vectorWritable);
+    } 
+  }
+  
   public static <K extends WritableComparable, V extends Writable> V readFirstValueFromSequenceFile(Configuration conf, 
                                                                                                     Path path, 
                                                                                                     Class<K> keyClass,

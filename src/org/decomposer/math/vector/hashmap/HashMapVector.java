@@ -18,18 +18,18 @@ public class HashMapVector implements MapVector, Serializable
   protected HashMap<Integer, Double> _map;
   protected int _maxDimension;
   
-  HashMapVector()
+  public HashMapVector()
   {
     this(10);
   }
 
-  HashMapVector(int initialSize) 
+  public HashMapVector(int initialSize) 
   {
     _maxDimension = 0;
     _map = new HashMap<Integer, Double>(initialSize);
   }
   
-  HashMapVector(MapVector other)
+  public HashMapVector(MapVector other)
   {
     this(other.numNonZeroEntries());
     for(IntDoublePair entry : other)

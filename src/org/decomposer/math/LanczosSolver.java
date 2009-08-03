@@ -4,6 +4,7 @@ package org.decomposer.math;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.math.linear.EigenDecomposition;
 import org.apache.commons.math.linear.EigenDecompositionImpl;
@@ -19,7 +20,7 @@ import org.decomposer.math.vector.hashmap.HashMapVectorFactory;
 
 public class LanczosSolver implements TimingConstants
 {
-  
+  public static double SAFE_MAX = 1e150;
   public void solve(DoubleMatrix corpus, 
                     int desiredRank,
                     DoubleMatrix eigenVectors, 
@@ -48,6 +49,7 @@ public class LanczosSolver implements TimingConstants
       endTime(TimingSection.ORTHOGANLIZE);
       // and normalize
       beta = nextVector.norm();
+      if(outOfRange(beta) || outOfRange(alpha)) break;
       nextVector.scale(1/beta);
       basis.set(i, nextVector);
       previousVector = currentVector;
@@ -82,7 +84,10 @@ public class LanczosSolver implements TimingConstants
     endTime(TimingSection.FINAL_EIGEN_CREATE);
   }
 
-  
+  private static boolean outOfRange(double d)
+  {
+    return Double.isNaN(d) || d > SAFE_MAX || -d > SAFE_MAX; 
+  }
   
   private void orthoganalizeAgainstAllButLast(MapVector nextVector, DoubleMatrix basis)
   {
@@ -93,18 +98,20 @@ public class LanczosSolver implements TimingConstants
     }
   }
 
-  private MapVector getInitialVector(DoubleMatrix corpus)
+  protected MapVector getInitialVector(DoubleMatrix corpus)
   {
-    MapVector v;
-    int i;
-    for(i = 0, v = null; i < corpus.numRows() && v == null; i++) v = corpus.get(i);
-    MapVector oldV = v;
-    v = new DenseMapVector();
-    for(IntDoublePair pair : oldV)
-      v.set(pair.getInt(), pair.getDouble());
-    for(Map.Entry<Integer, MapVector> entry : corpus)
+    MapVector v = null;
+    for(Entry<Integer, MapVector> entry : corpus)
     {
-      if(entry.getKey() != i) v.plus(entry.getValue());
+      MapVector vector = entry.getValue();
+      if(v == null)
+      {
+        v = new DenseMapVector().plus(vector);
+      }
+      else
+      {
+        v.plus(vector, vector.dot(v));
+      }
     }
     v.scale(1/v.norm());
     return v;

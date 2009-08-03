@@ -1,7 +1,5 @@
-dictionary.max.features=10000
-dictionary.output.path=/tmp/sparseVectorText/dictionary
-text.input.path=/Users/jmannix/wordcount/input_medline
-sparse.vector.output.path=/tmp/sparseVectorText/outputWed_Jul_15_14_46_01_PDT_2009
+sparse.vector.output.path=/tmp/sparseVectorText/wikipedia/outputWed_Jul_29_08_44_32_PDT_2009
+#/tmp/sparseVectorText/outputWed_Jul_15_14_46_01_PDT_2009
 #sparse.vector.output.path=contrib/hadoop/test/data/random_matrix/sequence_file_format/corpus
 dense.vector.output.path=/tmp/denseVectorOutput/output
 verbose=true

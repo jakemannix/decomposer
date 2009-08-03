@@ -14,14 +14,25 @@ public class FeatureDictionary implements Serializable
 {
   private static final long serialVersionUID = 1L;
   
-  protected Map<String, Feature> _featuresByName = new HashMap<String, Feature>();
-  protected Map<Integer, Feature> _featuresById = new HashMap<Integer, Feature>();
-  protected Integer _maxId = 0;
-  protected int _numDocs = 0;
+  
+  public Map<String, Feature> _featuresByName = new HashMap<String, Feature>();
+  public Map<Integer, Feature> _featuresById = new HashMap<Integer, Feature>();
+  public Integer _maxId = 0;
+  public int _numDocs = 0;
   
   public FeatureDictionary()
   {
     
+  }
+  
+  public FeatureDictionary(Feature[] features)
+  {
+    for(Feature feature : features)
+    {
+      _featuresById.put(feature.id, feature);
+      _featuresByName.put(feature.name, feature);
+      if(_numDocs < feature.count) _numDocs = feature.count + 1;
+    }
   }
   
   public FeatureDictionary(Iterable<? extends Map<String, Double>> documents)
@@ -74,7 +85,7 @@ public class FeatureDictionary implements Serializable
     } 
     f.count++;
   }
-  
+
   public static class Feature implements Serializable
   {
     private static final long serialVersionUID = 1L;

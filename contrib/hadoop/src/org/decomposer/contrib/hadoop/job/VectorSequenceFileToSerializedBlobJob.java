@@ -16,18 +16,18 @@ import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.ToolRunner;
 import org.decomposer.contrib.hadoop.BaseTool;
-import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
+import org.decomposer.contrib.hadoop.math.MapVectorWritableComparable;
 import org.decomposer.math.vector.DiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.DoubleMatrix;
 import org.decomposer.math.vector.HashMapDoubleMatrix;
 import org.decomposer.math.vector.hashmap.HashMapVectorFactory;
 
-public class SparseVectorSequenceFileToSerializedBlobJob extends BaseTool
+public class VectorSequenceFileToSerializedBlobJob extends BaseTool
 {
 
   public static void main(String[] args) throws Exception
   {
-    int retVal = ToolRunner.run(new SparseVectorSequenceFileToSerializedBlobJob(), args);
+    int retVal = ToolRunner.run(new VectorSequenceFileToSerializedBlobJob(), args);
     System.exit(retVal);
   }
   
@@ -45,7 +45,7 @@ public class SparseVectorSequenceFileToSerializedBlobJob extends BaseTool
     
     conf.setInt("output.block.size", Integer.parseInt(configProps.getProperty("output.block.size")));
     Job job = new Job(conf, "");
-    job.setJarByClass(SparseVectorSequenceFileToSerializedBlobJob.class);
+    job.setJarByClass(VectorSequenceFileToSerializedBlobJob.class);
     job.setMapperClass(BlobMapper.class);
     job.setNumReduceTasks(0);
     job.setInputFormatClass(SequenceFileInputFormat.class);
@@ -56,7 +56,7 @@ public class SparseVectorSequenceFileToSerializedBlobJob extends BaseTool
     return successful ? 1 : -1;
   }
 
-  public static class BlobMapper extends Mapper<LongWritable, SparseVectorWritableComparable, NullWritable, NullWritable>
+  public static class BlobMapper extends Mapper<LongWritable, MapVectorWritableComparable, NullWritable, NullWritable>
   {
     File outputPath;
     DoubleMatrix matrix;
@@ -70,10 +70,10 @@ public class SparseVectorSequenceFileToSerializedBlobJob extends BaseTool
       matrix = new HashMapDoubleMatrix(new HashMapVectorFactory());
     }
     @Override
-    public void map(LongWritable key, SparseVectorWritableComparable value, Context context) 
+    public void map(LongWritable key, MapVectorWritableComparable value, Context context) 
     {
       if(matrix.numRows() >= blockSize) flush();
-      matrix.set((int)key.get(), value.getVector());
+      matrix.set((int)key.get(), value);
     }
     
     public void cleanup(Context context)

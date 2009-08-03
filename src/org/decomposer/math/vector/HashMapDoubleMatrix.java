@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.decomposer.math.vector.array.DenseMapVectorFactory;
+
 public class HashMapDoubleMatrix implements DoubleMatrix, Serializable
 {
   private static final long serialVersionUID = 1L;
@@ -20,6 +22,16 @@ public class HashMapDoubleMatrix implements DoubleMatrix, Serializable
   {
     _map = new HashMap<Integer, MapVector>();
     _vectorFactory = vectorFactory;
+  }
+  
+  public HashMapDoubleMatrix()
+  {
+    this(new DenseMapVectorFactory());
+  }
+  
+  public HashMapDoubleMatrix(DoubleMatrix other)
+  {
+    this(other instanceof HashMapDoubleMatrix ? ((HashMapDoubleMatrix)other)._vectorFactory : new DenseMapVectorFactory(), other);
   }
   
   public HashMapDoubleMatrix(VectorFactory vectorFactory, DoubleMatrix other)

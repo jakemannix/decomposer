@@ -10,13 +10,12 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.SequenceFile.Writer;
-import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
+import org.decomposer.contrib.hadoop.math.MapVectorWritableComparable;
 import org.decomposer.math.vector.DiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.DoubleMatrix;
 import org.decomposer.math.vector.MapVector;
-import org.decomposer.math.vector.array.ImmutableSparseMapVector;
 
-public class SparseVectorFromSerializedBlobJob
+public class VectorSequenceFileFromSerializedBlobJob
 {
 
   /**
@@ -36,7 +35,7 @@ public class SparseVectorFromSerializedBlobJob
     writeMatrixToSequenceFile(new DiskBufferedDoubleMatrix(new File(eigenVectorDir), 1000), new Path(outputDir + "/eigenVectors"), conf);
   }
   
-  private static void writeMatrixToSequenceFile(DoubleMatrix matrix, Path outputDir, Configuration conf) throws Exception
+  public static void writeMatrixToSequenceFile(DoubleMatrix matrix, Path outputDir, Configuration conf) throws Exception
   {
     FileSystem fs = FileSystem.get(conf);
     
@@ -44,13 +43,13 @@ public class SparseVectorFromSerializedBlobJob
                                             conf, 
                                             outputDir, 
                                             LongWritable.class, 
-                                            SparseVectorWritableComparable.class);
-    SparseVectorWritableComparable vectorWritable = new SparseVectorWritableComparable();
+                                            MapVectorWritableComparable.class);
+    MapVectorWritableComparable vectorWritable = new MapVectorWritableComparable(outputDir);
     LongWritable key = new LongWritable();
     for(Entry<Integer, MapVector> vector : matrix)
     {
       vectorWritable.setRow(vector.getKey());
-      vectorWritable.setVector(new ImmutableSparseMapVector(vector.getValue()));
+      vectorWritable.setVector(vector.getValue());
       key.set(vector.getKey());
       writer.append(key, vectorWritable);
     }

@@ -1,0 +1,5 @@
+matrix.path=/tmp/sparseVectorText/wikipedia/outputSun_Aug_02_11_46_11_PDT_2009_transpose/part-r-00000
+#/tmp/eigenOutputPath/Sat_Aug_01_19_44_16_PDT_2009
+#/tmp/sparseVectorText/wikipedia/outputSat_Aug_01_19_28_59_PDT_2009/part-m-00000
+matrix.rows.to.view=0,200
+matrix.columns.to.view=0,710000

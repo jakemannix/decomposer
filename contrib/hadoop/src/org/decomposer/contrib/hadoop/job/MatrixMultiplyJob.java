@@ -15,9 +15,9 @@ import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.ToolRunner;
 import org.decomposer.contrib.hadoop.BaseTool;
 import org.decomposer.contrib.hadoop.io.CacheUtils;
-import org.decomposer.contrib.hadoop.io.DenseVectorWritableComparable;
 import org.decomposer.contrib.hadoop.mapreduce.MatrixMultiplyMapper;
 import org.decomposer.contrib.hadoop.mapreduce.MatrixMultiplyReducer;
+import org.decomposer.contrib.hadoop.math.MapVectorWritableComparable;
 import org.decomposer.math.vector.array.DenseMapVector;
 import org.decomposer.math.vector.array.DenseMapVectorFactory;
 
@@ -30,14 +30,12 @@ public class MatrixMultiplyJob extends BaseTool
     System.exit(ret);
   }
   
-  private static DenseMapVector randomDenseMapVector(int numDimensions) 
+  public static DenseMapVector randomDenseMapVector(int numDimensions) 
   {
     DenseMapVector vector = (DenseMapVector) new DenseMapVectorFactory().zeroVector(numDimensions);
     Random rand = new Random(System.nanoTime() * numDimensions);
-    for(int i=0; i<numDimensions; i++)
-    {
-      vector.set(i, rand.nextDouble());
-    }
+    for(int i=0; i<numDimensions; i++) vector.set(i, rand.nextDouble());
+    vector.scale(1/vector.norm());
     return vector;
   }
 
@@ -45,7 +43,6 @@ public class MatrixMultiplyJob extends BaseTool
   public int run(String[] args) throws Exception
   {
     Configuration conf = getConf();
-    conf.setBoolean("is.local", true);
     conf.set("job.name", System.currentTimeMillis() + "/");
     Properties configProps = loadJobProperties();
 
@@ -57,7 +54,7 @@ public class MatrixMultiplyJob extends BaseTool
     job.setReducerClass(MatrixMultiplyReducer.class);
     job.setInputFormatClass(SequenceFileInputFormat.class);
     job.setOutputKeyClass(NullWritable.class);
-    job.setOutputValueClass(DenseVectorWritableComparable.class);
+    job.setOutputValueClass(MapVectorWritableComparable.class);
     job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
     String timestamp = new Date().toString().replace(' ', '_').replace(':', '_');

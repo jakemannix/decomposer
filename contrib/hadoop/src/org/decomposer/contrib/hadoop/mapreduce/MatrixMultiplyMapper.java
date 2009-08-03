@@ -3,20 +3,16 @@ package org.decomposer.contrib.hadoop.mapreduce;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.filecache.DistributedCache;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.decomposer.contrib.hadoop.io.CacheUtils;
-import org.decomposer.contrib.hadoop.io.DenseVectorWritableComparable;
-import org.decomposer.contrib.hadoop.io.SparseVectorWritableComparable;
+import org.decomposer.contrib.hadoop.math.MapVectorWritableComparable;
 import org.decomposer.math.vector.array.DenseMapVector;
 
-public class MatrixMultiplyMapper extends Mapper<Object, SparseVectorWritableComparable, NullWritable, DenseVectorWritableComparable>
+public class MatrixMultiplyMapper extends Mapper<Object, MapVectorWritableComparable, LongWritable, MapVectorWritableComparable>
 {
-  protected DenseVectorWritableComparable inputVector = new DenseVectorWritableComparable();
-  protected DenseVectorWritableComparable output = new DenseVectorWritableComparable();
+  protected MapVectorWritableComparable inputVector;
+  protected MapVectorWritableComparable output;
   
   /**
    * Loads up, from the DistributedCache, the previous vector (which you are multiplying by)
@@ -25,19 +21,18 @@ public class MatrixMultiplyMapper extends Mapper<Object, SparseVectorWritableCom
    */
   protected void loadVectors(Configuration config) throws IOException
   {
-//    Path[] cacheFiles = DistributedCache.getLocalCacheFiles(config);
-//    FileSystem fs = FileSystem.getLocal(config);
-//    inputVector.readFields(fs.open(cacheFiles[0]));
-    DenseMapVector vector = CacheUtils.readSerializableFromCache(config, 
-                                                                 "inputVector", 
-                                                                 DenseMapVector.class);
-    inputVector.setVector(vector);
+    Path inputVectorPath = new Path(config.get("inputVector"));
+    inputVector = new MapVectorWritableComparable(inputVectorPath);
+    inputVector.setConf(config);
+    inputVector.localize();
   }
   
   @Override
   public void setup(Context context) throws IOException, InterruptedException
   {
     loadVectors(context.getConfiguration());
+    output = new MapVectorWritableComparable(new DenseMapVector(), -1L);
+    output.setConf(context.getConfiguration());
   }
 
 
@@ -45,10 +40,9 @@ public class MatrixMultiplyMapper extends Mapper<Object, SparseVectorWritableCom
    * input value is the row of the matrix to multiply by.  No output yet, just accumulate!
    */
   @Override
-  public void map(Object key, SparseVectorWritableComparable value, Context context) throws IOException, InterruptedException
+  public void map(Object key, MapVectorWritableComparable value, Context context) throws IOException, InterruptedException
   {
-    double dot = value.getVector().dot(inputVector.getVector());
-    output.getVector().plus(value.getVector(), dot);
+    output.plus(value, value.dot(inputVector));
   }
   
   /**
@@ -57,6 +51,6 @@ public class MatrixMultiplyMapper extends Mapper<Object, SparseVectorWritableCom
   @Override
   protected void cleanup(Context context) throws IOException, InterruptedException 
   {
-    context.write(NullWritable.get(), output);
+    context.write(new LongWritable(-1), output);
   }
 }
