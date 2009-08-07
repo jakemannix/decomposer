@@ -1,5 +1,7 @@
 package org.decomposer.math.vector;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Iterator;
 
 /**
@@ -99,4 +101,42 @@ public interface MapVector extends Iterable<IntDoublePair>, Cloneable
    * No order is guaranteed for the iteration, nor is it required to be deterministic.
    */
   Iterator<IntDoublePair> iterator();
+  
+  public interface Formatter
+  {
+    public String toString(MapVector vector, int numEntriesToShow);
+    public String toString(MapVector vector);
+  }
+  
+  public static final Formatter F = new Formatter()
+  {
+    private NumberFormat f = new DecimalFormat("0.###E0");
+    @Override
+    public String toString(MapVector vector, int numEntriesToShow)
+    {
+      String s = "{ ";
+      Iterator<IntDoublePair> it = vector.iterator();
+      IntDoublePair pair = null;
+      int i=0; 
+      while(it.hasNext() && i<numEntriesToShow)
+      {
+        pair = it.next();
+        i++;
+        s += "" + pair.getInt() + ":" + f.format(pair.getDouble());
+        if(it.hasNext()) s += ", ";
+      }
+      if(it.hasNext())
+      {
+        pair = it.next();
+        s += "" + pair.getInt() + ":" + f.format(pair.getDouble());
+      }
+      if(it.hasNext()) { s += ", ..."; }
+      s += " }";
+      return s; 
+    }
+    public String toString(MapVector vector)
+    {
+      return toString(vector, 100);
+    }
+  };
 }

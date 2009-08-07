@@ -228,6 +228,11 @@ public class DenseMapVector implements MapVector, Serializable
     return true;
   }
   
+  public String toString()
+  {
+    return MapVector.F.toString(this);
+  }
+  
   private final class DenseIntDoublePairIterator implements Iterator<IntDoublePair>
   {
     DenseIntDoublePair _pair = new DenseIntDoublePair();

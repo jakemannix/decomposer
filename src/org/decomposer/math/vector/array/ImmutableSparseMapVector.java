@@ -1,6 +1,8 @@
 package org.decomposer.math.vector.array;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -195,6 +197,12 @@ public class ImmutableSparseMapVector implements MapVector, Serializable
     // since this class is supposed to be immutable, returning itself as a clone should be ok
     return this;
   }
+  
+  public String toString()
+  {
+    return MapVector.F.toString(this);
+  }
+  
   
   @Override
   public boolean equals(Object other)

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.decomposer.math.vector.IntDoublePair;
 import org.decomposer.math.vector.MapVector;
+import org.decomposer.math.vector.array.ImmutableSparseMapVector;
 
 
 import static org.decomposer.math.PrecisionUtils.*;
@@ -127,7 +128,7 @@ public class HashMapVector implements MapVector, Serializable
   @Override
   public String toString()
   {
-    return "{norm:" + norm() + ", nonZeroEntries:" + numNonZeroEntries() + "}";
+    return new ImmutableSparseMapVector(this).toString();
   }
   
   @Override 

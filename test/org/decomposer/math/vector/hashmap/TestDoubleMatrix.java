@@ -187,9 +187,11 @@ public class TestDoubleMatrix extends TestCase
       MapVector vector = new HashMapVector();
       for(int j=0; j<numNonZeroEntries; j++)
       {
-        vector.set((int)(Math.random()*numCols), (float)(2*absMeanValue*Math.random()));
+        int col = numNonZeroEntries == numCols ? j : (int)(Math.random()*numCols);
+        vector.set(col, (float)(2*absMeanValue*Math.random()));
       }
-      matrix.set((int)(Math.random()*numRows), vector);
+      int row = numNonZeroRows == numRows ? i : (int)(Math.random()*numRows);
+      matrix.set(row, vector);
     }
     return matrix;
   }

@@ -41,8 +41,22 @@ public class DiskBufferedDoubleMatrix extends ImmutableStreamBufferedDoubleMatri
   
   // row_ABC_to_XYZ.ser
   // col_ABC_to_XYZ.ser
+
+  /**
+   * Basic constructor for an initially-empty matrix which can be persisted to disk.
+   * @param diskDir
+   */
+  public DiskBufferedDoubleMatrix(File diskDir)
+  {
+    this(diskDir, 1000, diskDir.mkdir() ? true : true);
+  }
   
-  
+  /**
+   * 
+   * @param diskDir
+   * @param pageSize
+   * @param isRowMatrix
+   */
   public DiskBufferedDoubleMatrix(File diskDir, int pageSize, boolean isRowMatrix)
   {
     _dir = diskDir;
@@ -73,6 +87,11 @@ public class DiskBufferedDoubleMatrix extends ImmutableStreamBufferedDoubleMatri
   public DiskBufferedDoubleMatrix(File diskDir, int pageSize)
   {
     this(diskDir, pageSize, true);
+  }
+  
+  public void saveToDisk() throws FileNotFoundException, IOException
+  {
+    persistChunk(_dir, this, _isRowMatrix);
   }
   
   public static DoubleMatrix loadFullMatrix(File diskDir, VectorFactory factory)
