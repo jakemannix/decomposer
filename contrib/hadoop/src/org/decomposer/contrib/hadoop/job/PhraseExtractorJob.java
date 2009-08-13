@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.IntWritable;
@@ -22,7 +23,7 @@ import org.decomposer.contrib.hadoop.phrases.IntSumReducer;
 import org.decomposer.contrib.hadoop.phrases.MLReducer;
 import org.decomposer.contrib.hadoop.phrases.SubNGramMapper;
 import org.decomposer.contrib.hadoop.phrases.SubNGramReducer;
-import org.decomposer.contrib.hadoop.phrases.TermCountingMapper;
+import org.decomposer.contrib.hadoop.phrases.NGramCountingMapper;
 import org.decomposer.contrib.hadoop.phrases.TextAndInt;
 
 
@@ -80,17 +81,34 @@ public class PhraseExtractorJob extends BaseTool
   
   public static class InverseFloatReducer extends InvertingReducer<FloatWritable, Text> {}
   
-  public static class ReverseFloatWritableComparator extends WritableComparator
+  public static abstract class ReverseWritableComparator extends WritableComparator
   {
-    public ReverseFloatWritableComparator()
+    protected ReverseWritableComparator(Class<? extends WritableComparable> keyClass)
     {
-      super(FloatWritable.class, true);
+      super(keyClass, true);
     }
     @Override
     public int compare(WritableComparable a, WritableComparable b)
     {
       return super.compare(b, a);
     }
+  }
+  
+  public static class ReverseFloatWritableComparator extends ReverseWritableComparator
+  {
+    public ReverseFloatWritableComparator()
+    {
+      super(FloatWritable.class);
+    }
+  }
+  
+  public static class ReverseIntWritableComparator extends ReverseWritableComparator
+  {
+    public ReverseIntWritableComparator()
+    {
+      super(IntWritable.class);
+    }
+    
   }
   
   public static enum PhrazerCounterTypes
@@ -133,7 +151,7 @@ public class PhraseExtractorJob extends BaseTool
     
     Job job = new Job(conf, "word count");
     job.setJarByClass(PhraseExtractorJob.class);
-    job.setMapperClass(TermCountingMapper.class);
+    job.setMapperClass(NGramCountingMapper.class);
     job.setReducerClass(IntSumReducer.class);
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
@@ -154,11 +172,24 @@ public class PhraseExtractorJob extends BaseTool
       job.setJarByClass(PhraseExtractorJob.class);
       job.setMapperClass(FilterAndReverseIntMapper.class);
       job.setReducerClass(InverseIntReducer.class);
+      job.setSortComparatorClass(ReverseIntWritableComparator.class);
       job.setOutputKeyClass(IntWritable.class);
       job.setOutputValueClass(Text.class);
       FileInputFormat.addInputPath(job, new Path(configProps.getProperty("ngram.count.path") + timestamp));
       FileOutputFormat.setOutputPath(job, new Path(configProps.getProperty("ngram.sorted.path") + timestamp));
       failed = !job.waitForCompletion(verbose);
+    }
+    
+    /**
+     * If ngram.maxValue = 1, we're just doing "WordCount", and so we're done, just copy to the output dir
+     */
+    
+    if(!failed && conf.getInt("ngram.maxValue", 2) == 1)
+    {
+      Path outputPath = new Path(configProps.getProperty("ngram.final.output.path") + timestamp);
+      FileSystem fs = FileSystem.get(conf);
+      fs.rename(new Path(configProps.getProperty("ngram.sorted.path") + timestamp), outputPath);
+      return failed ? -1 : 1;
     }
     
     /**

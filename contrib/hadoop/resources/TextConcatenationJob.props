@@ -1,3 +1,5 @@
 verbose=true
-text.input.path=/wikipedia-html-input
-text.output.path=/wikipedia-one-file
+text.input.path=file:///usr/local/gutenberg-txts
+text.output.path=/gutenberg/onefile-trimmed
+header.lines.to.chop=500
+footer.lines.to.chop=500

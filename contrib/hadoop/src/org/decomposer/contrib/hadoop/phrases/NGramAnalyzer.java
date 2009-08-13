@@ -34,7 +34,8 @@ public class NGramAnalyzer extends Analyzer
     System.arraycopy(StandardAnalyzer.STOP_WORDS, 0, stops, 0, StandardAnalyzer.STOP_WORDS.length);
     System.arraycopy(stopWords, 0, stops, StandardAnalyzer.STOP_WORDS.length, stopWords.length);
     result = new StopFilter(result, stops);
-    result = new ShingleFilter(result, max);
+    if(max > 1)
+      result = new ShingleFilter(result, max);
     return result;
   }
   

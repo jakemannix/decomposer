@@ -1,11 +1,11 @@
-filter.minValue = 2
-ngram.maxValue = 4
-input.isHtml = true
+filter.minValue = 10
+ngram.maxValue = 1
+input.isHtml = false
 verbose = true
 #input.path = /Users/jmannix/wordcount/input_medline
 #input.path = /Users/jmannix/wordcount/input_small
 #input.path = /usr/local/wikipedia/wp/a-html
-input.path = /Users/jmannix/wikipedia-html-onefile
+input.path = /gutenberg/7-small.txt
 #input.path = /Users/jmannix/wikipedia-a
 ngram.count.path = /tmp/wordcount/count
 ngram.sorted.path = /tmp/wordcount/sorted
@@ -13,4 +13,4 @@ ngram.joined.path = /tmp/wordcount/joined
 ngram.output.path = /tmp/wordcount/computed
 
 #ngram.final.output.path = /Users/jmannix/wordcount/output_final_medline_big
-ngram.final.output.path = /Users/jmannix/wordcount/output_final_wikipedia_A
+ngram.final.output.path = /gutenberg_phrases/7_small

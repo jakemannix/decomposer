@@ -1,0 +1,2 @@
+input.matrix.blob.dir=/usr/local/lj_graph_sample/testSocialGraph
+output.path=/lj_graph_sample/testSocialGraph/input
