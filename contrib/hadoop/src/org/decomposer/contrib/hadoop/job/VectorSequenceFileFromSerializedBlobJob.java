@@ -2,6 +2,7 @@ package org.decomposer.contrib.hadoop.job;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.Map.Entry;
 
 import org.apache.hadoop.conf.Configuration;
@@ -10,12 +11,14 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.SequenceFile.Writer;
+import org.apache.hadoop.util.ToolRunner;
+import org.decomposer.contrib.hadoop.BaseTool;
 import org.decomposer.contrib.hadoop.math.MapVectorWritableComparable;
 import org.decomposer.math.vector.DiskBufferedDoubleMatrix;
 import org.decomposer.math.vector.DoubleMatrix;
 import org.decomposer.math.vector.MapVector;
 
-public class VectorSequenceFileFromSerializedBlobJob
+public class VectorSequenceFileFromSerializedBlobJob extends BaseTool
 {
 
   /**
@@ -25,14 +28,8 @@ public class VectorSequenceFileFromSerializedBlobJob
    */
   public static void main(String[] args) throws Exception
   {
-    if(args.length != 3) usage();
-    String corpusDir = args[0];
-    String eigenVectorDir = args[1];
-    String outputDir = args[2];
-    
-    Configuration conf = new Configuration();
-    writeMatrixToSequenceFile(new DiskBufferedDoubleMatrix(new File(corpusDir), 1000), new Path(outputDir + "/corpus"), conf);
-    writeMatrixToSequenceFile(new DiskBufferedDoubleMatrix(new File(eigenVectorDir), 1000), new Path(outputDir + "/eigenVectors"), conf);
+    int ret = ToolRunner.run(new VectorSequenceFileFromSerializedBlobJob(), args);
+    System.exit(ret);
   }
   
   public static void writeMatrixToSequenceFile(DoubleMatrix matrix, Path outputDir, Configuration conf) throws Exception
@@ -56,9 +53,18 @@ public class VectorSequenceFileFromSerializedBlobJob
     
   }
 
-  private static void usage()
+  @Override
+  public int run(String[] args) throws Exception
   {
-    System.out.println("<java with -jar invocation> corpusDir eigenVectorDir outputDir");
-    System.exit(-1);
+    Configuration conf = getConf();
+    conf.setBoolean("is.local", true);
+    conf.set("job.name", System.currentTimeMillis() + "/");
+    Properties configProps = loadJobProperties();
+    
+    String inputDir = configProps.getProperty("input.matrix.blob.dir");
+    String outputPath = configProps.getProperty("output.path");
+    
+    writeMatrixToSequenceFile(new DiskBufferedDoubleMatrix(new File(inputDir), 1000), new Path(outputPath), conf);
+    return 1;
   }
 }

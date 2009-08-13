@@ -46,7 +46,7 @@ public class ConjugateGradientSolver
     smoother = rate/4;
   }
   
-  static int numPasses = 100;
+  static int numPasses = 25;
   
   public void solve()
   {

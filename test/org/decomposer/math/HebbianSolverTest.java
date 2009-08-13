@@ -34,7 +34,7 @@ public class HebbianSolverTest extends TestCase
   
   public static final String TMP_EIGEN_DIR = "tmp.HebbianSolverTest.eigenDir";
 
-  private static DoubleMatrix _previousCorpus = null;
+  public static DoubleMatrix _previousCorpus = null;
   
   public HebbianSolverTest(String name)
   {
@@ -113,7 +113,12 @@ public class HebbianSolverTest extends TestCase
   
   public static long timeSolver(TrainingState state) throws Exception
   {
-    return timeSolver(null, new DenseMapVectorFactory(), new DenseMapVectorFactory(), 0.01, 5, state);
+    return timeSolver(state, 10);
+  }
+  
+  public static long timeSolver(TrainingState state, int rank) throws Exception
+  {
+    return timeSolver(null, new DenseMapVectorFactory(), new DenseMapVectorFactory(), 0.01, 20, rank, state);
   }
   
   public void testHebbianSolver() throws Exception

@@ -236,10 +236,15 @@ public class DenseMapVector implements MapVector, Serializable
   private final class DenseIntDoublePairIterator implements Iterator<IntDoublePair>
   {
     DenseIntDoublePair _pair = new DenseIntDoublePair();
+    final int max = Integer.MAX_VALUE;
+    public DenseIntDoublePairIterator()
+    {
+      //max = maxDimension();
+    }
     
     public final boolean hasNext()
     {
-      return _pair.getInt() < _values.length - 1;
+      return _pair._i < max - 1 && _pair._i < _values.length - 1;
     }
 
     public final IntDoublePair next()

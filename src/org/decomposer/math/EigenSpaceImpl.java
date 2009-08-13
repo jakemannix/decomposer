@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.decomposer.math.vector.DoubleMatrix;
 import org.decomposer.math.vector.IntDoublePair;
+import org.decomposer.math.vector.IntDoublePairImpl;
 import org.decomposer.math.vector.MapVector;
 import org.decomposer.math.vector.array.DenseMapVectorFactory;
 import org.decomposer.math.vector.array.ImmutableSparseMapVector;
@@ -39,7 +40,10 @@ public class EigenSpaceImpl implements EigenSpace
   {
     MapVector output = _eigenvectors.times(documentVector);
     for(IntDoublePair pair : output)
+    {
+      if(pair.getInt() >= _inverseSingularValues.length) break;
       pair.setDouble(pair.getDouble() * _inverseSingularValues[pair.getInt()]);
+    }
     return output;
   }
   
@@ -68,13 +72,14 @@ public class EigenSpaceImpl implements EigenSpace
       }
     };
     Set<IntDoublePair> bestPairs = new FixedSizeSortedSet<IntDoublePair>(comparator, numNonZeroEntries);
-    for(IntDoublePair pair : input) bestPairs.add(pair);
+    for(final IntDoublePair pair : input) bestPairs.add(new IntDoublePairImpl(pair));
     List<IntDoublePair> resortedPairs = new ArrayList<IntDoublePair>(bestPairs);
     Collections.sort(resortedPairs, new Comparator<IntDoublePair>()
                      {
                         public int compare(IntDoublePair o1, IntDoublePair o2)
                         {
-                          return o2.getInt() - o1.getInt();
+                          if(o1.getInt() == o2.getInt()) return 0;
+                          return o1.getInt() - o2.getInt() > 0 ? 1 : -1;
                         }
                      });
     int[] indices = new int[numNonZeroEntries];
@@ -85,6 +90,7 @@ public class EigenSpaceImpl implements EigenSpace
       indices[i] = pair.getInt();
       values[i] = pair.getDouble();
       i++;
+      if(i >= numNonZeroEntries) break;
     }
     return new ImmutableSparseMapVector(indices, values);
   }

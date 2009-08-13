@@ -111,7 +111,6 @@ public interface MapVector extends Iterable<IntDoublePair>, Cloneable
   public static final Formatter F = new Formatter()
   {
     private NumberFormat f = new DecimalFormat("0.###E0");
-    @Override
     public String toString(MapVector vector, int numEntriesToShow)
     {
       String s = "{ ";
